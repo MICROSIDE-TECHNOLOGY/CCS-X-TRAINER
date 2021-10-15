@@ -1,0 +1,44 @@
+[PROJECT]
+Target=ULTRASONICO.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=ULTRASONICO.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\devices\;C:\Program Files (x86)\PICC\drivers\
+[ULTRASONICO.c]
+Type=4
+[mru-list]
+1=ULTRASONICO.c
+[Opened Files]
+1=ULTRASONICO.c
+2=
+t1=1
+Count=1
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=2
+D1=27-09-2021
+D1_L=4
+D1_L1=[50726]Project Opened.
+D1_L2=[50739]Started Editing.
+D1_L3=[50766]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D1_E=1
+D1_D=0
+D1_L4=[50766]Project Closed.
+D2=15-10-2021
+D2_L=2
+D2_L1=[66509]Project Opened.
+D2_L2=[66545]Project Closed.
+
+[defines]
+buildcount=2
+[Units]
+Count=1
+1=ULTRASONICO (main)

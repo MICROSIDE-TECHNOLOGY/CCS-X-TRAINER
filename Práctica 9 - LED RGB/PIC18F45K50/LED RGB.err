@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 9 - LED RGB\Proyecto\PIC18F45K50\LED RGB on 27-sep.-21 at 13:29
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 9 - LED RGB\Proyecto\PIC18F45K50\LED RGB.c" Line 54(1,1): Condition always TRUE
+      Memory usage:   ROM=1%      RAM=0% - 0%
+      0 Errors,  1 Warnings.
+Build Successful.

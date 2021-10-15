@@ -1,0 +1,132 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-007 temperatura
+008     lcd_init.i
+008     @PSTRINGCN_755.P1
+008-009 @ITOF.P2
+008-00B @PRINTF_L32D_755FPFPF.P3
+009     lcd_init.@SCRATCH1
+009     @PSTRINGCN_755.@SCRATCH1
+00A     @PSTRINGCN_755.@SCRATCH2
+00C     @PRINTF_L32D_755FPFPF.P1
+00D     @PRINTF_L32D_755FPFPF.@SCRATCH1
+00E     @PRINTF_L32D_755FPFPF.@SCRATCH2
+00F     @PRINTF_L32D_755FPFPF.@SCRATCH3
+010     @PRINTF_L32D_755FPFPF.@SCRATCH4
+011     @PRINTF_L32D_755FPFPF.@SCRATCH5
+012     @PRINTF_L32D_755FPFPF.@SCRATCH6
+013     @PRINTF_L32D_755FPFPF.@SCRATCH7
+014     @PRINTF_L32D_755FPFPF.@SCRATCH8
+015-018 @DIV3232.P1
+015-018 @MULFF.P2
+015-018 @FTOSD.P3
+015     lcd_putc.c
+016     @delay_ms1.P1
+016     lcd_gotoxy.x
+017     lcd_gotoxy.y
+018     lcd_gotoxy.address
+019-01C @DIV3232.P1
+019-01C @MULFF.P2
+019     lcd_gotoxy.@SCRATCH1
+019     @FTOSD.@SCRATCH1
+01A     lcd_send_byte.address
+01B     lcd_send_byte.n
+01C     lcd_read_byte.low
+01C     lcd_send_byte.@SCRATCH1
+01D     lcd_send_nibble.nibble
+01D     lcd_read_byte.high
+01D     @MULFF.@SCRATCH1
+01D     @DIV3232.@SCRATCH1
+01E     lcd_read_nibble.retval
+01E.0   lcd_read_nibble.retval_0
+01E.1   lcd_read_nibble.retval_1
+01E.2   lcd_read_nibble.retval_2
+01E.3   lcd_read_nibble.retval_3
+01E     lcd_read_byte.@SCRATCH1
+01E     @MULFF.@SCRATCH2
+01E     @DIV3232.@SCRATCH2
+01F     @MULFF.@SCRATCH3
+01F     @DIV3232.@SCRATCH3
+020     @DIV3232.@SCRATCH4
+021     @DIV3232.@SCRATCH5
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  LCD_INIT_STRING.call
+002018  LCD_INIT_STRING.data
+00201C  @const773.call
+002032  @delay_ms1
+00205A  lcd_send_nibble
+0020A0  lcd_read_nibble
+0020D2  lcd_read_byte
+0020F6  lcd_send_byte
+002138  lcd_init
+002186  @ITOF
+0021BE  @MULFF
+0022B0  lcd_gotoxy
+0022D4  lcd_putc
+002316  @PSTRINGCN_755
+002336  @FTOSD
+002376  @DIV3232
+002404  @PRINTF_L32D_755FPFPF
+00257E  @cinit1
+00257E  MAIN
+00258E  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 17 - LM35\Proyecto\PIC18F4550\
+
+Project Files:
+    Sensor de temperatura LM35.c                            [27-sep.-21 14:01  CRC=1D34F424]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+    flex_lcd.h                                              [30-abr.-08 14:08  CRC=282E02A0]
+
+Source signature=2D4F6C55
+Program memory checksum=0000
+Hex file CRC=66D6
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 17 - LM35\Proyecto\PIC18F4550\Sensor de temperatura LM35 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Sensor de temperatura LM35.xsym
+    Errors:      Sensor de temperatura LM35.err
+    Ext Symbols: Sensor de temperatura LM35.esym
+    INHX32:      Sensor de temperatura LM35.hex
+    Symbols:     Sensor de temperatura LM35.sym
+    List:        Sensor de temperatura LM35.lst
+    Debug/COFF:  Sensor de temperatura LM35.cof
+    Project:     Sensor de temperatura LM35.ccspjt
+    Call Tree:   Sensor de temperatura LM35.tre
+    Statistics:  Sensor de temperatura LM35.STA

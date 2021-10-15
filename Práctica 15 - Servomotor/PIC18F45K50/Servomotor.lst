@@ -1,0 +1,310 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               27-sep.-21 13:54
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 15 - Servomotor\Proyecto\PIC18F45K50\Servomotor.lst
+
+               ROM used:   464 bytes (1%)
+                           Largest free fragment is 24108
+               RAM used:   30 (1%) at main() level
+                           31 (2%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 31
+
+*
+2000:  GOTO   210C
+*
+2008:  MOVWF  04
+200A:  MOVFF  FD8,05
+200E:  MOVFF  FE0,06
+2012:  MOVLB  0
+2014:  MOVFF  FE9,0C
+2018:  MOVFF  FEA,07
+201C:  MOVFF  FE1,08
+2020:  MOVFF  FE2,09
+2024:  MOVFF  FD9,0A
+2028:  MOVFF  FDA,0B
+202C:  MOVFF  FF3,12
+2030:  MOVFF  FF4,13
+2034:  MOVFF  FFA,14
+2038:  MOVFF  FF5,15
+203C:  MOVFF  FF6,16
+2040:  MOVFF  FF7,17
+2044:  MOVFF  00,0E
+2048:  MOVFF  01,0F
+204C:  MOVFF  02,10
+2050:  MOVFF  03,11
+2054:  BTFSS  FF2.5
+2056:  GOTO   2060
+205A:  BTFSC  FF2.2
+205C:  GOTO   20AE
+2060:  MOVFF  0E,00
+2064:  MOVFF  0F,01
+2068:  MOVFF  10,02
+206C:  MOVFF  11,03
+2070:  MOVFF  0C,FE9
+2074:  MOVFF  07,FEA
+2078:  BSF    07.7
+207A:  MOVFF  08,FE1
+207E:  MOVFF  09,FE2
+2082:  MOVFF  0A,FD9
+2086:  MOVFF  0B,FDA
+208A:  MOVFF  12,FF3
+208E:  MOVFF  13,FF4
+2092:  MOVFF  14,FFA
+2096:  MOVFF  15,FF5
+209A:  MOVFF  16,FF6
+209E:  MOVFF  17,FF7
+20A2:  MOVF   04,W
+20A4:  MOVFF  06,FE0
+20A8:  MOVFF  05,FD8
+20AC:  RETFIE 0
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Controlar la posicíon de un servo por medio del módulo PWM interno
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                    // Para PIC18F4550 cambiar por: #include <18F4550.h>
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #use delay(internal=48MHz)               // Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+20C4:  MOVLW  01
+20C6:  SUBWF  1E,F
+20C8:  BNC   20E2
+20CA:  CLRF   FEA
+20CC:  MOVLW  1E
+20CE:  MOVWF  FE9
+20D0:  MOVF   FEF,W
+20D2:  BZ    20E2
+20D4:  MOVLW  02
+20D6:  MOVWF  00
+20D8:  DECFSZ 00,F
+20DA:  BRA    20D8
+20DC:  BRA    20DE
+20DE:  DECFSZ FEF,F
+20E0:  BRA    20D4
+20E2:  RETURN 0
+20E4:  CLRF   FEA
+20E6:  MOVLW  1D
+20E8:  MOVWF  FE9
+20EA:  MOVF   FEF,W
+20EC:  BZ    210A
+20EE:  MOVLW  0F
+20F0:  MOVWF  01
+20F2:  CLRF   00
+20F4:  DECFSZ 00,F
+20F6:  BRA    20F4
+20F8:  DECFSZ 01,F
+20FA:  BRA    20F2
+20FC:  MOVLW  8F
+20FE:  MOVWF  00
+2100:  DECFSZ 00,F
+2102:  BRA    2100
+2104:  NOP   
+2106:  DECFSZ FEF,F
+2108:  BRA    20EE
+210A:  RETURN 0
+.................... #build(reset=0x02000,interrupt=0x02008)  // Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                    // Reserva espacio en memoria para el bootloader
+.................... 
+.................... int16 DUTY;                              //variable para ajustar el valor del PWM
+.................... int1 SUBE;
+.................... int i;
+.................... 
+.................... #int_TIMER0
+.................... 
+....................  
+.................... void TIMER0_isr(){
+.................... output_high(PIN_C2);                    //Salida Pin_C2
+*
+20AE:  BCF    F94.2
+20B0:  BSF    F8B.2
+.................... SUBE=1;
+20B2:  BSF    1B.0
+.................... set_timer0(5780);                      
+20B4:  MOVLW  16
+20B6:  MOVWF  FD7
+20B8:  MOVLW  94
+20BA:  MOVWF  FD6
+20BC:  NOP   
+20BE:  BCF    FF2.2
+20C0:  GOTO   2060
+.................... }
+.................... 
+.................... void main()
+*
+210C:  CLRF   FF8
+210E:  BCF    FD0.7
+2110:  BSF    07.7
+2112:  MOVLW  70
+2114:  MOVWF  FD3
+2116:  CLRF   FD2
+2118:  CLRF   F9B
+211A:  MOVLB  F
+211C:  CLRF   x5B
+211E:  CLRF   x5C
+2120:  CLRF   x5D
+2122:  CLRF   x5E
+2124:  CLRF   x5F
+2126:  CLRF   F9A
+2128:  CLRF   F99
+212A:  CLRF   F98
+.................... {    
+....................   set_tris_c(0xFB);                      // C2 salida
+212C:  MOVLW  FB
+212E:  MOVWF  F94
+....................   setup_timer_0(T0_INTERNAL|T0_DIV_4);
+2130:  MOVLW  81
+2132:  MOVWF  FD5
+....................   enable_interrupts(INT_TIMER0);
+2134:  BSF    FF2.5
+....................   enable_interrupts(GLOBAL);
+2136:  MOVLW  C0
+2138:  IORWF  FF2,F
+....................   
+....................         while(1)
+....................               {
+.................... 
+....................                     for(i=0;i<255;i++)
+213A:  CLRF   1C
+213C:  INCFSZ 1C,W
+213E:  BRA    2142
+2140:  BRA    216C
+....................                          {
+....................                              if(SUBE==1)
+2142:  BTFSS  1B.0
+2144:  BRA    2164
+....................                              {
+....................                                 delay_us(500);        //0°
+2146:  MOVLW  02
+2148:  MOVWF  1D
+214A:  MOVLW  FA
+214C:  MOVWF  1E
+214E:  MOVLB  0
+2150:  RCALL  20C4
+2152:  DECFSZ 1D,F
+2154:  BRA    2158
+2156:  BRA    215C
+2158:  MOVLB  F
+215A:  BRA    214A
+....................                                  output_low( PIN_C2);
+215C:  BCF    F94.2
+215E:  BCF    F8B.2
+....................                                  SUBE=0;
+2160:  BCF    1B.0
+2162:  MOVLB  F
+....................                               }
+....................                                 while(SUBE==0);
+2164:  BTFSS  1B.0
+2166:  BRA    2164
+2168:  INCF   1C,F
+216A:  BRA    213C
+....................                             }
+.................... 
+....................                       for(i=0;i<255;i++)
+216C:  CLRF   1C
+216E:  INCFSZ 1C,W
+2170:  BRA    2174
+2172:  BRA    219E
+....................                            {
+....................                               if(SUBE==1)
+2174:  BTFSS  1B.0
+2176:  BRA    2196
+....................                                {
+....................                                   delay_us(1500);     //90°
+2178:  MOVLW  01
+217A:  MOVWF  1D
+217C:  MOVLB  0
+217E:  RCALL  20E4
+2180:  MOVLW  02
+2182:  MOVWF  1D
+2184:  MOVLW  FA
+2186:  MOVWF  1E
+2188:  RCALL  20C4
+218A:  DECFSZ 1D,F
+218C:  BRA    2184
+....................                                    output_low( PIN_C2);
+218E:  BCF    F94.2
+2190:  BCF    F8B.2
+....................                                    SUBE=0;
+2192:  BCF    1B.0
+2194:  MOVLB  F
+....................                                 }
+....................                                 while(SUBE==0);
+2196:  BTFSS  1B.0
+2198:  BRA    2196
+219A:  INCF   1C,F
+219C:  BRA    216E
+....................                           } 
+.................... 
+....................                         for(i=0;i<255;i++)
+219E:  CLRF   1C
+21A0:  INCFSZ 1C,W
+21A2:  BRA    21A6
+21A4:  BRA    21D0
+....................                                {
+....................                                   if(SUBE==1)
+21A6:  BTFSS  1B.0
+21A8:  BRA    21C8
+....................                                   {
+....................                                       delay_us(2500); //180°
+21AA:  MOVLW  02
+21AC:  MOVWF  1D
+21AE:  MOVLB  0
+21B0:  RCALL  20E4
+21B2:  MOVLW  02
+21B4:  MOVWF  1D
+21B6:  MOVLW  FA
+21B8:  MOVWF  1E
+21BA:  RCALL  20C4
+21BC:  DECFSZ 1D,F
+21BE:  BRA    21B6
+....................                                       output_low( PIN_C2);
+21C0:  BCF    F94.2
+21C2:  BCF    F8B.2
+....................                                        SUBE=0;
+21C4:  BCF    1B.0
+21C6:  MOVLB  F
+....................                                    }
+....................                                   while(SUBE==0);
+21C8:  BTFSS  1B.0
+21CA:  BRA    21C8
+21CC:  INCF   1C,F
+21CE:  BRA    21A0
+....................                                     }
+21D0:  BRA    213A
+.................... 
+....................                  }
+.................... }
+21D2:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

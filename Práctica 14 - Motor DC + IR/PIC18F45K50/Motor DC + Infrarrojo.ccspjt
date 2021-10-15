@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Motor DC + Infrarrojo.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Motor DC + Infrarrojo.c
+[Motor DC + Infrarrojo.c]
+Type=4
+[mru-list]
+1=Motor DC + Infrarrojo.c
+
+[defines]
+buildcount=2
+
+[Opened Files]
+1=Motor DC + Infrarrojo.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[44343]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[49813]Project Opened.
+D2_L2=[49825]Started Editing.
+D2_L3=[49884]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D2_E=1
+D2_D=0
+D2_L4=[49884]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Motor DC + Infrarrojo (main)

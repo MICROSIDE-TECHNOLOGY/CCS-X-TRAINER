@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 14 - Motor DC + IR\Proyecto\PIC18F4550\Motor DC + Infrarrojo on 27-sep.-21 at 13:52
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 14 - Motor DC + IR\Proyecto\PIC18F4550\Motor DC + Infrarrojo.c" Line 33(1,1): Condition always TRUE
+      Memory usage:   ROM=2%      RAM=0% - 1%
+      0 Errors,  1 Warnings.
+Build Successful.

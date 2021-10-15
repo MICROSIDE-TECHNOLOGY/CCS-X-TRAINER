@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 6 - ADC Set Point\Proyecto\PIC18F45K50\ADC Set Point on 05-oct.-21 at 15:03
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 6 - ADC Set Point\Proyecto\PIC18F45K50\ADC Set Point.c" Line 32(1,1): Condition always TRUE
+      Memory usage:   ROM=0%      RAM=0% - 0%
+      0 Errors,  1 Warnings.
+Build Successful.

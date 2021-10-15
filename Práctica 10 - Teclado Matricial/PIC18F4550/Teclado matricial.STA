@@ -1,0 +1,51 @@
+
+ROM used:   404/32768 (1%)
+            408/32768 (1%) including unused fragments
+
+            0.4 Average locations per line
+            6.3 Average locations per statement
+
+RAM used:   9/2048 (0%) at main() level
+            13/2048 (1%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   63    10  16  Teclado matricial.c
+  877     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h
+  113    54  84  Teclado4x4.h
+----- -----
+ 1053    64 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     32   4    0             @const734
+0      8   1    0     17  0.8  kbd_init
+0     56   7    1    125  3.0  ALL_ROWS
+0    214  26    4   1554  8.4  kbd_getc
+0     34   4    0             @goto55600
+0     56   7    0    149  3.0  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              64
+    Comments                222
+    Volume (V)              2187
+    Difficulty (D)          16.0
+    Effort to implement (E) 34933
+    Time to implement (T)   32 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   16
+    Maintainability (MI)    50
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   400  24168  
+
+
+

@@ -1,0 +1,44 @@
+[PROJECT]
+Target=PWM1.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=PWM1.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\devices\;C:\Program Files (x86)\PICC\drivers\
+[PWM1.c]
+Type=4
+[mru-list]
+1=PWM1.c
+[Opened Files]
+1=PWM1.c
+2=
+t1=1
+Count=1
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=2
+D1=27-09-2021
+D1_L=4
+D1_L1=[45217]Project Opened.
+D1_L2=[45232]Started Editing.
+D1_L3=[45275]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D1_E=1
+D1_D=0
+D1_L4=[45275]Project Closed.
+D2=15-10-2021
+D2_L=2
+D2_L1=[64434]Project Opened.
+D2_L2=[64514]Project Closed.
+[Units]
+Count=1
+1=PWM1 (main)
+
+[defines]
+buildcount=1

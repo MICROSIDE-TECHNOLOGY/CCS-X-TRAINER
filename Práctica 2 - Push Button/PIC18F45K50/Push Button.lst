@@ -1,0 +1,111 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               05-oct.-21 13:55
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 2 - Push Button\Proyecto\PIC18F45K50\Push Button.lst
+
+               ROM used:   58 bytes (0%)
+                           Largest free fragment is 24514
+               RAM used:   4 (0%) at main() level
+                           4 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2008
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... File Name:
+.................... Push Button.c
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... 
+.................... /*
+.................... ---------------------------------------------------------------------------
+....................  Implementar el control de encendido y apagado de un LED mediante
+....................  un botón pulsador.
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                                  //Incluye el microcontrolador con el que se va a trabajar
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #use delay(internal=48MHz)                             //Tipo de oscilador y frecuencia dependiendo del microcontrolador
+.................... #build(reset=0x02000,interrupt=0x02008)                //Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                                  //Reserva espacio en memoria para el bootloader
+.................... #define LED PIN_A4                                     //Asigna el pin A1 al LED del X-TRAINER
+.................... #define BOTON PIN_A2                                   //Asigna el pin A2 al boton BOOT del X-TRAINER
+.................... 
+.................... void main (void)
+*
+2008:  CLRF   FF8
+200A:  BCF    FD0.7
+200C:  MOVLW  70
+200E:  MOVWF  FD3
+2010:  CLRF   FD2
+2012:  CLRF   F9B
+2014:  MOVLB  F
+2016:  CLRF   x5B
+2018:  CLRF   x5C
+201A:  CLRF   x5D
+201C:  CLRF   x5E
+201E:  CLRF   x5F
+2020:  CLRF   F9A
+2022:  CLRF   F99
+2024:  CLRF   F98
+....................  {
+....................    set_tris_a (0b11111101);                             //Pin A1 como salida
+2026:  MOVLW  FD
+2028:  MOVWF  F92
+.................... 
+....................    while (1)                                            //Ciclo repetitivo
+.................... 
+....................    {
+....................     if (0 == input (BOTON))                             //Lee el estado del boton
+202A:  BSF    F92.2
+202C:  BTFSC  F80.2
+202E:  BRA    2036
+....................       {
+....................        output_high (LED);                               //Si se presiona el boton enciende el LED
+2030:  BCF    F92.4
+2032:  BSF    F89.4
+....................       }
+2034:  BRA    203A
+.................... 
+....................      else
+.................... 
+....................      {
+....................       output_low (LED);                                  //De lo contrario el LED se apaga
+2036:  BCF    F92.4
+2038:  BCF    F89.4
+....................      }
+203A:  BRA    202A
+....................    }
+.................... }
+203C:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

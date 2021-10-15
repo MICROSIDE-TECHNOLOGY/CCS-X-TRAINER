@@ -1,0 +1,142 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               05-oct.-21 15:03
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 6 - ADC Set Point\Proyecto\PIC18F45K50\ADC Set Point.lst
+
+               ROM used:   108 bytes (0%)
+                           Largest free fragment is 24464
+               RAM used:   5 (0%) at main() level
+                           5 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2008
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... 
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Implementar una lectura analógica de un potenciómetro, si el valor del ADC supera
+.................... un Set Point, el LED encenderá.
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                     //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #DEVICE ADC=8                             //Configura el ADC a 8 bits
+.................... #use delay(internal=48MHz)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #build(reset=0x02000,interrupt=0x02008)   //Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                     //Reserva espacio en memoria para el bootloader
+.................... #define LED PIN_A4                       //Pin donde está conectado el LED de X-TRAINER
+.................... 
+.................... int ValorPot;                             //Variable para almacenar el valor leído del ADC
+.................... 
+.................... void main()
+*
+2008:  CLRF   FF8
+200A:  BCF    FD0.7
+200C:  MOVLW  70
+200E:  MOVWF  FD3
+2010:  CLRF   FD2
+2012:  CLRF   F9B
+2014:  MOVLB  F
+2016:  CLRF   x5B
+2018:  CLRF   x5C
+201A:  CLRF   x5D
+201C:  CLRF   x5E
+201E:  CLRF   x5F
+2020:  CLRF   F9A
+2022:  CLRF   F99
+2024:  CLRF   F98
+.................... 
+.................... {
+....................     setup_adc_ports (sAN0);                   //Configura solo el puerto A0 como entrada analógica
+2026:  MOVF   FC1,W
+2028:  ANDLW  F0
+202A:  MOVWF  FC1
+202C:  MOVLW  01
+202E:  MOVWF  x5B
+2030:  MOVLW  00
+2032:  MOVWF  x5F
+2034:  MOVWF  x5C
+2036:  MOVWF  x5D
+2038:  MOVWF  x5E
+....................     setup_adc (ADC_CLOCK_INTERNAL);           //Configura oscilador interno para la conversión
+203A:  MOVF   FC0,W
+203C:  ANDLW  C0
+203E:  IORLW  07
+2040:  MOVWF  FC0
+2042:  BCF    FC0.7
+2044:  BSF    FC2.0
+.................... 
+....................     while (1)
+.................... 
+....................   {
+....................        set_adc_channel (0);                //Selecciona el canal 0 para la conversión
+2046:  MOVLW  00
+2048:  MOVWF  01
+204A:  MOVF   FC2,W
+204C:  ANDLW  83
+204E:  IORWF  01,W
+2050:  MOVWF  FC2
+....................        ValorPot = read_adc ();             //Lee el valor del ADC y lo guarda en la variable
+2052:  BSF    FC2.1
+2054:  BTFSC  FC2.1
+2056:  BRA    2054
+2058:  MOVFF  FC4,04
+....................        
+....................       if (ValorPot >= 128)                 //Compara el valor de el ADC con 128
+205C:  MOVF   04,W
+205E:  SUBLW  7F
+2060:  BC    2068
+.................... 
+....................              {
+....................                      output_HIGH (LED);    // Leds activos
+2062:  BCF    F92.4
+2064:  BSF    F89.4
+....................              }
+2066:  BRA    206C
+.................... 
+....................       else
+.................... 
+....................              {
+....................                     output_LOW (LED);       // Leds activos
+2068:  BCF    F92.4
+206A:  BCF    F89.4
+....................              }
+206C:  BRA    2046
+....................        }
+.................... }
+.................... 
+206E:  SLEEP 
+....................  
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

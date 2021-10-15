@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Motor DC + Driver L298N.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Motor DC + Driver L298N.c
+[Motor DC + Driver L298N.c]
+Type=4
+[mru-list]
+1=Motor DC + Driver L298N.c
+
+[defines]
+buildcount=3
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[43808]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[49717]Project Opened.
+D2_L2=[49724]Started Editing.
+D2_L3=[49785]Stopped Editing.
+TotalEdit=2
+TotalDebug=0
+D2_E=2
+D2_D=0
+D2_L4=[49785]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=Motor DC + Driver L298N.c
+t1=1
+Count=1
+[Units]
+Count=1
+1=Motor DC + Driver L298N (main)

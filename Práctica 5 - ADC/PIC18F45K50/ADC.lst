@@ -1,0 +1,232 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               27-sep.-21 12:05
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica-5-ADC\Práctica 5 - ADC\Proyecto\PIC18F45K50\ADC.lst
+
+               ROM used:   210 bytes (1%)
+                           Largest free fragment is 24362
+               RAM used:   5 (0%) at main() level
+                           5 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2008
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Implementar una lectura analógica de un potenciómetro y desplegar el valor
+.................... en 8 LEDs
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                          //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #DEVICE ADC=8                                  //Configura el ADC a 8 bits
+.................... #use delay(internal=48MHz)                     //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #build(reset=0x02000,interrupt=0x02008)        //Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                          //Reserva espacio en memoria para el bootloader
+.................... 
+.................... int ValorPot;                                  //Variable para almacenar el valor leído del ADC
+....................  
+.................... void main()
+*
+2008:  CLRF   FF8
+200A:  BCF    FD0.7
+200C:  MOVLW  70
+200E:  MOVWF  FD3
+2010:  CLRF   FD2
+2012:  CLRF   F9B
+2014:  MOVLB  F
+2016:  CLRF   x5B
+2018:  CLRF   x5C
+201A:  CLRF   x5D
+201C:  CLRF   x5E
+201E:  CLRF   x5F
+2020:  CLRF   F9A
+2022:  CLRF   F99
+2024:  CLRF   F98
+.................... {
+....................               set_tris_b (0X00);                             //Configura todo el puerto B como salidas digitales
+2026:  MOVLW  00
+2028:  MOVWF  F93
+....................               setup_adc_ports (sAN0);                        //Configura solo el puerto A0 como entrada analógica
+202A:  MOVF   FC1,W
+202C:  ANDLW  F0
+202E:  MOVWF  FC1
+2030:  MOVLW  01
+2032:  MOVWF  x5B
+2034:  MOVLW  00
+2036:  MOVWF  x5F
+2038:  MOVWF  x5C
+203A:  MOVWF  x5D
+203C:  MOVWF  x5E
+....................               setup_adc (ADC_CLOCK_INTERNAL);                //Configura oscilador interno para la conversión
+203E:  MOVF   FC0,W
+2040:  ANDLW  C0
+2042:  IORLW  07
+2044:  MOVWF  FC0
+2046:  BCF    FC0.7
+2048:  BSF    FC2.0
+....................               
+....................               while (1)
+.................... 
+....................                     {
+....................                           set_adc_channel (0);                       //Selecciona el canal 0 para la conversión
+204A:  MOVLW  00
+204C:  MOVWF  01
+204E:  MOVF   FC2,W
+2050:  ANDLW  83
+2052:  IORWF  01,W
+2054:  MOVWF  FC2
+....................                          ValorPot = read_adc ();                     //Lee el valor del ADC y lo guarda en la variable
+2056:  BSF    FC2.1
+2058:  BTFSC  FC2.1
+205A:  BRA    2058
+205C:  MOVFF  FC4,04
+....................                          
+....................                           if (ValorPot <= 28)                        //Compara el valor de el ADC con 28
+2060:  MOVF   04,W
+2062:  SUBLW  1C
+2064:  BNC   206C
+....................                                 {
+....................                                     output_b (0b00000000);           // Leds activos
+2066:  CLRF   F93
+2068:  CLRF   F8A
+....................                                 }
+206A:  BRA    20D2
+.................... 
+....................                            else if (ValorPot <= 56)                  //Compara el valor de el ADC con 56
+206C:  MOVF   04,W
+206E:  SUBLW  38
+2070:  BNC   207A
+.................... 
+....................                                 {
+....................                                     output_b (0b00000001);           // Leds activos
+2072:  CLRF   F93
+2074:  MOVLW  01
+2076:  MOVWF  F8A
+....................                                 }
+2078:  BRA    20D2
+.................... 
+....................                             else if (ValorPot <= 84)                 //Compara el valor de el ADC con 84
+207A:  MOVF   04,W
+207C:  SUBLW  54
+207E:  BNC   2088
+.................... 
+....................                                 {
+....................                                     output_b (0b00000011);           // Leds activos
+2080:  CLRF   F93
+2082:  MOVLW  03
+2084:  MOVWF  F8A
+....................                                 }
+2086:  BRA    20D2
+.................... 
+....................                            else if (ValorPot <= 112)                 //Compara el valor de el ADC con 112
+2088:  MOVF   04,W
+208A:  SUBLW  70
+208C:  BNC   2096
+.................... 
+....................                                 {
+....................                                       output_b (0b00000111);         // Leds activos
+208E:  CLRF   F93
+2090:  MOVLW  07
+2092:  MOVWF  F8A
+....................                                 }
+2094:  BRA    20D2
+.................... 
+....................                            else if (ValorPot <= 140)                 //Compara el valor de el ADC con 140
+2096:  MOVF   04,W
+2098:  SUBLW  8C
+209A:  BNC   20A4
+.................... 
+....................                                 {
+....................                                       output_b (0b00001111);         // Leds activos
+209C:  CLRF   F93
+209E:  MOVLW  0F
+20A0:  MOVWF  F8A
+....................                                 }
+20A2:  BRA    20D2
+.................... 
+....................                             else if (ValorPot <= 168)                //Compara el valor de el ADC con 168
+20A4:  MOVF   04,W
+20A6:  SUBLW  A8
+20A8:  BNC   20B2
+.................... 
+....................                                  {
+....................                                         output_b (0b00011111);       // Leds activos
+20AA:  CLRF   F93
+20AC:  MOVLW  1F
+20AE:  MOVWF  F8A
+....................                                  }
+20B0:  BRA    20D2
+.................... 
+....................                              else if (ValorPot <= 196)               //Compara el valor de el ADC con 196
+20B2:  MOVF   04,W
+20B4:  SUBLW  C4
+20B6:  BNC   20C0
+.................... 
+....................                                  {
+....................                                          output_b (0b00111111);      // Leds activos
+20B8:  CLRF   F93
+20BA:  MOVLW  3F
+20BC:  MOVWF  F8A
+....................                                  }
+20BE:  BRA    20D2
+.................... 
+....................                              else if (ValorPot <= 252)               //Compara el valor de el ADC con 252
+20C0:  MOVF   04,W
+20C2:  SUBLW  FC
+20C4:  BNC   20CE
+.................... 
+....................                                  {
+....................                                        output_b (0b01111111);        // Leds activos
+20C6:  CLRF   F93
+20C8:  MOVLW  7F
+20CA:  MOVWF  F8A
+....................                                  }
+20CC:  BRA    20D2
+.................... 
+....................                              else if (ValorPot <= 255)               //Compara el valor de el ADC con 255
+.................... 
+....................                                  {
+....................                                        output_b (0b11111111);      // Leds activos
+20CE:  CLRF   F93
+20D0:  SETF   F8A
+....................                                  }
+20D2:  BRA    204A
+.................... 
+....................                }
+.................... 
+.................... }
+20D4:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

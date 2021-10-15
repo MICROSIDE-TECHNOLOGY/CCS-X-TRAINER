@@ -1,0 +1,61 @@
+[PROJECT]
+Target=ADC Set Point.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=ADC Set Point.c
+[ADC Set Point.c]
+Type=4
+[mru-list]
+1=ADC Set Point.c
+
+[defines]
+buildcount=3
+
+[Opened Files]
+1=ADC Set Point.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=5
+D1=01-12-2020
+D1_L=1
+D1_L1=[36545]Project Closed.
+D2=27-09-2021
+D2_L=8
+D2_L1=[43720]Project Opened.
+D2_L2=[43735]Started Editing.
+D2_L3=[44042]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D2_E=2
+D2_D=0
+D2_L4=[44097]Project Closed.
+D2_L5=[44963]Project Opened.
+D2_L6=[44979]Started Editing.
+D2_L7=[45009]Stopped Editing.
+D2_L8=[45009]Project Closed.
+D3=05-10-2021
+D3_L=4
+D3_L1=[54158]Project Opened.
+D3_L2=[54185]Started Editing.
+D3_L3=[54250]Stopped Editing.
+D3_E=2
+D3_D=0
+D3_L4=[54251]Project Closed.
+D4=07-10-2021
+D4_L=2
+D4_L1=[51578]Project Opened.
+D4_L2=[59485]Project Closed.
+D5=15-10-2021
+D5_L=2
+D5_L1=[58953]Project Opened.
+D5_L2=[58967]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=ADC Set Point (main)

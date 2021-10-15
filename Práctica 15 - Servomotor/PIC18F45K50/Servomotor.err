@@ -1,0 +1,6 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 15 - Servomotor\Proyecto\PIC18F45K50\Servomotor on 27-sep.-21 at 13:54
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 15 - Servomotor\Proyecto\PIC18F45K50\Servomotor.c" Line 40(1,1): Condition always TRUE
+>>> Warning 202 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 15 - Servomotor\Proyecto\PIC18F45K50\Servomotor.c" Line 20(7,11): Variable never used:   duty
+      Memory usage:   ROM=1%      RAM=1% - 2%
+      0 Errors,  2 Warnings.
+Build Successful.

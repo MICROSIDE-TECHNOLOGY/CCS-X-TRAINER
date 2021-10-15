@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 16 - Servo + Pot\Proyecto\PIC18F4550\Servomotor + Potenciómetro on 27-sep.-21 at 13:58
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 16 - Servo + Pot\Proyecto\PIC18F4550\Servomotor + Potenciómetro.c" Line 52(1,1): Condition always TRUE
+      Memory usage:   ROM=1%      RAM=1% - 1%
+      0 Errors,  1 Warnings.
+Build Successful.

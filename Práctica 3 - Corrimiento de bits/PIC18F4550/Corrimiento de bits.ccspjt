@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Corrimiento de bits.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Corrimiento de bits.c
+[Corrimiento de bits.c]
+Type=4
+[mru-list]
+1=Corrimiento de bits.c
+
+[defines]
+buildcount=2
+
+[Opened Files]
+1=Corrimiento de bits.c
+t1=11
+Count=1
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[35601]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[42378]Project Opened.
+D2_L2=[42391]Started Editing.
+D2_L3=[42581]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D2_E=4
+D2_D=0
+D2_L4=[42581]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Corrimiento de bits (main)

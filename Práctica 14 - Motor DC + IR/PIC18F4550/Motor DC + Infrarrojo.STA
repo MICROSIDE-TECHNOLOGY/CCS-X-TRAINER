@@ -1,0 +1,48 @@
+
+ROM used:   510/32768 (2%)
+            514/32768 (2%) including unused fragments
+
+            0.6 Average locations per line
+            56.7 Average locations per statement
+
+RAM used:   6/2048 (0%) at main() level
+            17/2048 (1%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   46     9 100  Motor DC + Infrarrojo.c
+  877     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h
+----- -----
+  923     9 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0    148  15    1    230  3.5  main
+0     56   5    2             @ITOF
+0    244  24   11             @MULFF
+0     58   6    4             @SFTOI
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              9
+    Comments                191
+    Volume (V)              238
+    Difficulty (D)          3.0
+    Effort to implement (E) 713
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    134
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   506  24062  
+
+
+

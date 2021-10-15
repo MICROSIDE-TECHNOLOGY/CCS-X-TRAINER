@@ -1,0 +1,104 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 @sprintf_string
+006     lcd_init.i
+006     MAIN.@SCRATCH1
+006     @PSTRINGC_755.@SCRATCH1
+007     lcd_init.@SCRATCH1
+007     @PSTRINGC_755.@SCRATCH2
+008     lcd_putc.c
+009     lcd_gotoxy.x
+009     @delay_ms1.P1
+00A     lcd_gotoxy.y
+00B     lcd_gotoxy.address
+00C     lcd_gotoxy.@SCRATCH1
+00D     lcd_send_byte.address
+00E     lcd_send_byte.n
+00F     lcd_read_byte.low
+00F     lcd_send_byte.@SCRATCH1
+010     lcd_send_nibble.nibble
+010     lcd_read_byte.high
+011     lcd_read_nibble.retval
+011.0   lcd_read_nibble.retval_0
+011.1   lcd_read_nibble.retval_1
+011.2   lcd_read_nibble.retval_2
+011.3   lcd_read_nibble.retval_3
+011     lcd_read_byte.@SCRATCH1
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  LCD_INIT_STRING.call
+002018  LCD_INIT_STRING.data
+00201C  @const767.call
+00202A  @const772.call
+002038  @const773.call
+002046  @delay_ms1
+00206E  lcd_send_nibble
+0020B4  lcd_read_nibble
+0020E6  lcd_read_byte
+00210A  lcd_send_byte
+00214C  lcd_init
+002198  lcd_gotoxy
+0021BA  lcd_putc
+0021FE  @PSTRINGC_755
+00221E  MAIN
+00221E  @cinit1
+002232  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 11 - LCD\Proyecto\PIC18F4550\
+
+Project Files:
+    LCD.c                                                   [27-sep.-21 13:44  CRC=008EDD4D]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+    flex_lcd.h                                              [30-abr.-08 14:08  CRC=282E02A0]
+
+Source signature=10A9557E
+Program memory checksum=0000
+Hex file CRC=6D76
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 11 - LCD\Proyecto\PIC18F4550\LCD (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   LCD.xsym
+    Errors:      LCD.err
+    Ext Symbols: LCD.esym
+    INHX32:      LCD.hex
+    Symbols:     LCD.sym
+    List:        LCD.lst
+    Debug/COFF:  LCD.cof
+    Project:     LCD.ccspjt
+    Call Tree:   LCD.tre
+    Statistics:  LCD.STA

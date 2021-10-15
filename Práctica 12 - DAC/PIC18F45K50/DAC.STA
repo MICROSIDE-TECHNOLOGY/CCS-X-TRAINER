@@ -1,0 +1,46 @@
+
+ROM used:   210/32768 (1%)
+            214/32768 (1%) including unused fragments
+
+            0.2 Average locations per line
+            13.1 Average locations per statement
+
+RAM used:   6/2048 (0%) at main() level
+            7/2048 (0%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   73    16 100  DAC.c
+  988     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F45K50.h
+----- -----
+ 1061    16 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     40  10    1             @delay_ms1
+0    166  40    1    391  4.7  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              16
+    Comments                235
+    Volume (V)              395
+    Difficulty (D)          4.4
+    Effort to implement (E) 1751
+    Time to implement (T)   2 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    45
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   206  24362  
+
+
+

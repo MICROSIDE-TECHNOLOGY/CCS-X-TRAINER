@@ -1,0 +1,65 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     ValorPot
+F78.6   C2OUT
+F79.6   C1OUT
+F90     CCP_2_LOW
+F90     CCP_2
+F91     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P3
+FE9-FEA @READ_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  main
+002008  @cinit1
+002026  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 6 - ADC Set Point\Proyecto\PIC18F45K50\
+
+Project Files:
+    ADC Set Point.c                                         [05-oct.-21 15:03  CRC=3AAC5CFE]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F45K50.h [12-jul.-21 11:39  CRC=D2529886]
+
+Source signature=DF518E0A
+Program memory checksum=0000
+Hex file CRC=02AC
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 6 - ADC Set Point\Proyecto\PIC18F45K50\ADC Set Point (main)
+
+Compiler Settings:
+    Processor:      PIC18F45K50
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   ADC Set Point.xsym
+    Errors:      ADC Set Point.err
+    Ext Symbols: ADC Set Point.esym
+    INHX32:      ADC Set Point.hex
+    Symbols:     ADC Set Point.sym
+    List:        ADC Set Point.lst
+    Debug/COFF:  ADC Set Point.cof
+    Project:     ADC Set Point.ccspjt
+    Call Tree:   ADC Set Point.tre
+    Statistics:  ADC Set Point.STA

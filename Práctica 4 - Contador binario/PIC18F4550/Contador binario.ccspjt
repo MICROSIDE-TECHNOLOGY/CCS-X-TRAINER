@@ -1,0 +1,45 @@
+[PROJECT]
+Target=Contador binario.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Contador binario.c
+[Contador binario.c]
+Type=4
+[mru-list]
+1=Contador binario.c
+
+[defines]
+buildcount=2
+
+[Opened Files]
+1=Contador binario.c
+t1=17
+Count=1
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[35753]Project Closed.
+D2=27-09-2021
+D2_L=8
+D2_L1=[42799]Project Opened.
+D2_L2=[42889]Started Editing.
+D2_L3=[42940]Stopped Editing.
+TotalEdit=2
+TotalDebug=0
+D2_E=2
+D2_D=0
+D2_L4=[42940]Project Closed.
+D2_L5=[43635]Project Opened.
+D2_L6=[43643]Started Editing.
+D2_L7=[43652]Stopped Editing.
+D2_L8=[43652]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Contador binario (main)

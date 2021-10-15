@@ -1,0 +1,210 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               27-sep.-21 13:45
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 12 - DAC\Proyecto\PIC18F45K50\DAC.lst
+
+               ROM used:   210 bytes (1%)
+                           Largest free fragment is 24362
+               RAM used:   6 (0%) at main() level
+                           7 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2030
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... 
+.................... /*
+.................... 
+.................... Esta práctica consiste en realizar un control DAC para variar el voltaje de una
+.................... salida analogica y visualizarlo en un LED.
+.................... 
+.................... ———————Registros para configurar el modulo DAC——————-
+.................... VREFCON1: Registro de configuración de voltajes de referencia
+.................... BIT7 <DACEN> 1=DAC ACTIVO, 0=DAC DESACTIVO
+.................... BIT6 <DACLPS> 0=NEGATIVA REFERENCIA, 1=POSITIVA REFERENCIA
+.................... BIT5 <DACOUT> 0=PIN DE SALIDA DESACTIVADO, 1=PIN DE SALIDA ACTIVADO
+.................... BIT4 <NO IMPLEMENTADO>
+.................... BIT3,BIT2 <DACPSS> FUENTE POSITIVA
+.................... 00 = VDD
+.................... 01 = VREF +
+.................... 10 = FVR (Referencia de Voltaje Fijo)
+.................... 11 = Reservado
+.................... BIT1 <NO IMPLEMENTADO>
+.................... BIT0 <DACNSS> 0=VSS, 1= -VREF
+.................... VREFCON2 El valor del DAC se carga en este registro; DAC 5 bits (0-31 decimal)
+.................... */
+.................... 
+.................... #include <18F45K50.h>                          //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #use delay(internal=48MHz)                     //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+2008:  CLRF   FEA
+200A:  MOVLW  06
+200C:  MOVWF  FE9
+200E:  MOVF   FEF,W
+2010:  BZ    202E
+2012:  MOVLW  0F
+2014:  MOVWF  01
+2016:  CLRF   00
+2018:  DECFSZ 00,F
+201A:  BRA    2018
+201C:  DECFSZ 01,F
+201E:  BRA    2016
+2020:  MOVLW  8F
+2022:  MOVWF  00
+2024:  DECFSZ 00,F
+2026:  BRA    2024
+2028:  NOP   
+202A:  DECFSZ FEF,F
+202C:  BRA    2012
+202E:  RETURN 0
+.................... #build(reset=0x02000,interrupt=0x02008)        //Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                          //Reserva espacio en memoria para el bootloader
+.................... 
+.................... #BYTE VREFCON1=0XF7C                           //Posición del registro en la memoria del pic18f45k50
+.................... #BYTE VREFCON2=0XF7B
+.................... 
+.................... signed INT VALOR;
+.................... 
+.................... 
+.................... void main()
+2030:  CLRF   FF8
+2032:  BCF    FD0.7
+2034:  MOVLW  70
+2036:  MOVWF  FD3
+2038:  CLRF   FD2
+203A:  CLRF   F9B
+203C:  MOVLB  F
+203E:  CLRF   x5B
+2040:  CLRF   x5C
+2042:  CLRF   x5D
+2044:  CLRF   x5E
+2046:  CLRF   x5F
+2048:  CLRF   F9A
+204A:  CLRF   F99
+204C:  CLRF   F98
+.................... {
+....................       VREFCON1 = 0b10100000;                   //Registro de configuración de voltajes de referencia de DAC
+204E:  MOVLW  A0
+2050:  MOVWF  F7C
+....................       set_tris_b (0x00);                       //Configuración del puerto B como salidas digitales
+2052:  MOVLW  00
+2054:  MOVWF  F93
+.................... 
+....................       while (true)
+.................... 
+....................           {
+....................                  for (VALOR = 0; VALOR < 32; VALOR++)
+2056:  CLRF   04
+2058:  BTFSC  04.7
+205A:  BRA    2062
+205C:  MOVF   04,W
+205E:  SUBLW  1F
+2060:  BNC   2088
+.................... 
+....................                    {
+.................... 
+....................                        VREFCON2 = VALOR;       //Valor que se carga al DAC. 
+2062:  MOVFF  04,F7B
+....................                        output_b (VALOR);       //Se pasa el valor al puerto B
+2066:  CLRF   F93
+2068:  MOVFF  04,F8A
+....................                        delay_ms (500);         //Retardo
+206C:  MOVLW  02
+206E:  MOVWF  05
+2070:  MOVLW  FA
+2072:  MOVWF  06
+2074:  MOVLB  0
+2076:  RCALL  2008
+2078:  DECFSZ 05,F
+207A:  BRA    207E
+207C:  BRA    2082
+207E:  MOVLB  F
+2080:  BRA    2070
+2082:  INCF   04,F
+2084:  MOVLB  F
+2086:  BRA    2058
+.................... 
+....................                     }
+.................... 
+....................                    delay_ms (2000);            //Retardo
+2088:  MOVLW  08
+208A:  MOVWF  05
+208C:  MOVLW  FA
+208E:  MOVWF  06
+2090:  MOVLB  0
+2092:  RCALL  2008
+2094:  DECFSZ 05,F
+2096:  BRA    209A
+2098:  BRA    209E
+209A:  MOVLB  F
+209C:  BRA    208C
+.................... 
+....................                   for (VALOR = 31; VALOR >= 0; VALOR--)
+209E:  MOVLW  1F
+20A0:  MOVWF  04
+20A2:  BTFSC  04.7
+20A4:  BRA    20C2
+.................... 
+....................                      {
+....................                           VREFCON2 = VALOR;     //Valor que se carga al DAC.
+20A6:  MOVFF  04,F7B
+....................                           output_b (VALOR);     //Se pasa el valor al puerto B
+20AA:  CLRF   F93
+20AC:  MOVFF  04,F8A
+....................                           delay_ms (500);       //Retardo
+20B0:  MOVLW  02
+20B2:  MOVWF  05
+20B4:  MOVLW  FA
+20B6:  MOVWF  06
+20B8:  RCALL  2008
+20BA:  DECFSZ 05,F
+20BC:  BRA    20B4
+20BE:  DECF   04,F
+20C0:  BRA    20A2
+....................                 }
+.................... 
+....................               delay_ms (2000);                  //Retardo
+20C2:  MOVLW  08
+20C4:  MOVWF  05
+20C6:  MOVLW  FA
+20C8:  MOVWF  06
+20CA:  RCALL  2008
+20CC:  DECFSZ 05,F
+20CE:  BRA    20C6
+20D0:  MOVLB  F
+20D2:  BRA    2056
+....................        }
+.................... }
+20D4:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

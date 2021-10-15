@@ -1,0 +1,10 @@
+ÀÄTeclado matricial
+   ÀÄMAIN  0/72  Ram=0
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@cinit2  (Inline)  Ram=0
+      ÃÄkbd_init  0/8  Ram=0
+      ÀÄkbd_getc  0/214  Ram=4
+         ÃÄ@goto7957  0/34  Ram=0
+         ÃÄALL_ROWS  0/56  Ram=1
+         ÃÄALL_ROWS  0/56  Ram=1
+         ÀÄ@const740  0/32  Ram=0

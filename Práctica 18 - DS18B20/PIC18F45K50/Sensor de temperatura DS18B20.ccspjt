@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Sensor de temperatura DS18B20.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Sensor de temperatura DS18B20.c
+[Sensor de temperatura DS18B20.c]
+Type=4
+[mru-list]
+1=Sensor de temperatura DS18B20.c
+
+[defines]
+buildcount=2
+
+[ProjectLog]
+Days=2
+D1=02-12-2020
+D1_L=1
+D1_L1=[35823]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[50585]Project Opened.
+D2_L2=[50610]Started Editing.
+D2_L3=[50630]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D2_E=1
+D2_D=0
+D2_L4=[50630]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=Sensor de temperatura DS18B20.c
+t1=1
+Count=1
+[Units]
+Count=1
+1=Sensor de temperatura DS18B20 (main)

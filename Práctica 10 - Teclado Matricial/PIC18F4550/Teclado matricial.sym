@@ -1,0 +1,82 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     TECLA_PRESS
+005     kbd_getc.kbd_call_count
+006.0   kbd_getc.kbd_down
+007     kbd_getc.last_key
+008     kbd_getc.col
+009     kbd_getc.kchar
+00A     kbd_getc.row
+00B     ALL_ROWS.@SCRATCH1
+00B     kbd_getc.@SCRATCH1
+00C     kbd_getc.@SCRATCH2
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  KEYS.call
+002018  KEYS.data
+002028  kbd_init
+002030  ALL_ROWS
+002068  kbd_getc
+00213E  @goto55600
+002160  MAIN
+002160  @cinit1
+002170  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 10 - Teclado Matricial\Proyecto\PIC18F4550\
+
+Project Files:
+    Teclado matricial.c                                     [11-oct.-21 16:57  CRC=AA2728D3]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+    Teclado4x4.h                                            [17-ene.-19 20:16  CRC=49978A86]
+
+Source signature=FD14B0D0
+Program memory checksum=0000
+Hex file CRC=48A6
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 10 - Teclado Matricial\Proyecto\PIC18F4550\Teclado matricial (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Teclado matricial.xsym
+    Errors:      Teclado matricial.err
+    Ext Symbols: Teclado matricial.esym
+    INHX32:      Teclado matricial.hex
+    Symbols:     Teclado matricial.sym
+    List:        Teclado matricial.lst
+    Debug/COFF:  Teclado matricial.cof
+    Project:     Teclado matricial.ccspjt
+    Call Tree:   Teclado matricial.tre
+    Statistics:  Teclado matricial.STA

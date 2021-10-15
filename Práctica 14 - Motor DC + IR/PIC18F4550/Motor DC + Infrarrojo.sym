@@ -1,0 +1,77 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004     VALOR_ADC
+005-008 @SFTOI.P1
+005     main.@SCRATCH1
+006-007 @ITOF.P1
+006-009 @MULFF.P2
+00A-00D @MULFF.P1
+00E     @MULFF.@SCRATCH1
+00F     @MULFF.@SCRATCH2
+010     @MULFF.@SCRATCH3
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @WRITE_PACKED_MEMORY.P1
+FE1-FE2 @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PROGRAM_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  @ITOF
+002040  @MULFF
+002134  @SFTOI
+00216E  main
+00216E  @cinit1
+00217E  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 14 - Motor DC + IR\Proyecto\PIC18F4550\
+
+Project Files:
+    Motor DC + Infrarrojo.c                                 [27-sep.-21 13:52  CRC=F8C2B33F]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+
+Source signature=783F9921
+Program memory checksum=0000
+Hex file CRC=851A
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 14 - Motor DC + IR\Proyecto\PIC18F4550\Motor DC + Infrarrojo (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Motor DC + Infrarrojo.xsym
+    Errors:      Motor DC + Infrarrojo.err
+    Ext Symbols: Motor DC + Infrarrojo.esym
+    INHX32:      Motor DC + Infrarrojo.hex
+    Symbols:     Motor DC + Infrarrojo.sym
+    List:        Motor DC + Infrarrojo.lst
+    Debug/COFF:  Motor DC + Infrarrojo.cof
+    Project:     Motor DC + Infrarrojo.ccspjt
+    Call Tree:   Motor DC + Infrarrojo.tre
+    Statistics:  Motor DC + Infrarrojo.STA

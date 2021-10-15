@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 19 - BOOT_CCS\Práctica-19-BOOT_CCS\Proyecto\ULTRASONICO on 15-oct.-21 at 18:28
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 19 - BOOT_CCS\Práctica-19-BOOT_CCS\Proyecto\ULTRASONICO.c" Line 43(1,1): Condition always TRUE
+      Memory usage:   ROM=6%      RAM=1% - 2%
+      0 Errors,  1 Warnings.
+Build Successful.

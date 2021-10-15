@@ -1,0 +1,63 @@
+
+ROM used:   2024/32768 (6%)
+            2028/32768 (6%) including unused fragments
+
+            1.7 Average locations per line
+            23.0 Average locations per statement
+
+RAM used:   16/2048 (1%) at main() level
+            32/2048 (2%) worst case
+
+Stack used: 4 worst case (4 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   63    19  22  ULTRASONICO.c
+  877     0   0  ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h
+  239    69  78  flex_lcd.h
+----- -----
+ 1179    88 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     40   1    1             @delay_ms1
+0     32   1    1             @delay_us1
+0     20   0    0             @const733
+0     70   2    1    328  2.7  lcd_send_nibble
+0     50   1    1    362  2.3  lcd_read_nibble
+0     36   1    3    165  3.3  lcd_read_byte
+0     66   2    3    319  4.1  lcd_send_byte
+0     78   2    2    384  4.4  lcd_init
+0     36   1    4    186  5.5  lcd_gotoxy
+0     66   2    1    275  3.9  lcd_putc
+0    314   8    4    468  4.5  MAIN
+0     54   1    2             @ITOF
+0    242   6   11             @MULFF
+0    620  15   16             @ADDFF
+0     58   1    4             @SFTOI
+0     20   0    0             @const782
+0     30   1    3             @PSTRINGCN_755
+0    188   5    9             @PRINTF_LU_755
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               8
+    Statements              88
+    Comments                256
+    Volume (V)              3911
+    Difficulty (D)          29.0
+    Effort to implement (E) 113363
+    Time to implement (T)   1 hours, 45 minutes
+    Est Delivered Bugs (B)  1
+    Cyclomatic Complexity   8
+    Maintainability (MI)    130
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE  2020  22548  
+
+
+

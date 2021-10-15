@@ -1,0 +1,57 @@
+[PROJECT]
+Target=Blink LED.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Blink LED.c
+[Blink LED.c]
+Type=4
+[mru-list]
+1=Blink LED.c
+
+[defines]
+buildcount=6
+
+[Opened Files]
+1=..\..\..\Práctica 2 - Push Button\Proyecto\PIC18F45K50\Push Button.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=4
+D1=01-12-2020
+D1_L=1
+D1_L1=[35165]Project Closed.
+D2=27-09-2021
+D2_L=2
+D2_L1=[41274]Project Opened.
+D2_L2=[41608]Project Closed.
+D3=05-10-2021
+D3_L=4
+D3_L1=[49848]Project Opened.
+D3_L2=[49902]Started Editing.
+D3_L3=[50004]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D3_E=2
+D3_D=0
+D3_L4=[50004]Project Closed.
+D4=15-10-2021
+D4_L=8
+D4_L1=[55531]Project Opened.
+D4_L2=[55542]Started Editing.
+D4_L3=[55566]Stopped Editing.
+D4_E=2
+D4_D=0
+D4_L4=[55566]Project Closed.
+D4_L5=[55616]Project Opened.
+D4_L6=[58764]Started Editing.
+D4_L7=[58780]Stopped Editing.
+D4_L8=[58780]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Blink LED (main)

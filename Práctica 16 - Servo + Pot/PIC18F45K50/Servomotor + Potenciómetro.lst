@@ -1,0 +1,267 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               08-oct.-21 13:07
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 16 - Servo + Pot\Proyecto\PIC18F45K50\Servomotor + Potenciómetro.lst
+
+               ROM used:   396 bytes (1%)
+                           Largest free fragment is 24176
+               RAM used:   29 (1%) at main() level
+                           30 (1%) worst case
+               Stack used: 1 locations (0 in main + 1 for interrupts)
+               Stack size: 31
+
+*
+2000:  GOTO   20E4
+*
+2008:  MOVWF  04
+200A:  MOVFF  FD8,05
+200E:  MOVFF  FE0,06
+2012:  MOVLB  0
+2014:  MOVFF  FE9,0C
+2018:  MOVFF  FEA,07
+201C:  MOVFF  FE1,08
+2020:  MOVFF  FE2,09
+2024:  MOVFF  FD9,0A
+2028:  MOVFF  FDA,0B
+202C:  MOVFF  FF3,12
+2030:  MOVFF  FF4,13
+2034:  MOVFF  FFA,14
+2038:  MOVFF  FF5,15
+203C:  MOVFF  FF6,16
+2040:  MOVFF  FF7,17
+2044:  MOVFF  00,0E
+2048:  MOVFF  01,0F
+204C:  MOVFF  02,10
+2050:  MOVFF  03,11
+2054:  BTFSS  FF2.5
+2056:  GOTO   2060
+205A:  BTFSC  FF2.2
+205C:  GOTO   20AE
+2060:  MOVFF  0E,00
+2064:  MOVFF  0F,01
+2068:  MOVFF  10,02
+206C:  MOVFF  11,03
+2070:  MOVFF  0C,FE9
+2074:  MOVFF  07,FEA
+2078:  BSF    07.7
+207A:  MOVFF  08,FE1
+207E:  MOVFF  09,FE2
+2082:  MOVFF  0A,FD9
+2086:  MOVFF  0B,FDA
+208A:  MOVFF  12,FF3
+208E:  MOVFF  13,FF4
+2092:  MOVFF  14,FFA
+2096:  MOVFF  15,FF5
+209A:  MOVFF  16,FF6
+209E:  MOVFF  17,FF7
+20A2:  MOVF   04,W
+20A4:  MOVFF  06,FE0
+20A8:  MOVFF  05,FD8
+20AC:  RETFIE 0
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Controlar la posición de un servomotor por medio de un potenciometro
+.................... utilizando los modulos PWM y ADC
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                                  //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #device ADC=10                                         // Configura el ADC
+.................... #use delay(internal=48MHz)                             // Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+20C4:  MOVLW  01
+20C6:  SUBWF  1D,F
+20C8:  BNC   20E2
+20CA:  CLRF   FEA
+20CC:  MOVLW  1D
+20CE:  MOVWF  FE9
+20D0:  MOVF   FEF,W
+20D2:  BZ    20E2
+20D4:  MOVLW  02
+20D6:  MOVWF  00
+20D8:  DECFSZ 00,F
+20DA:  BRA    20D8
+20DC:  BRA    20DE
+20DE:  DECFSZ FEF,F
+20E0:  BRA    20D4
+20E2:  RETURN 0
+.................... #build(reset=0x02000,interrupt=0x02008)                // Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... 
+.................... #org 0x0000,0x1FFF {}                                  // Reserva espacio en memoria para el bootloader
+.................... 
+.................... int16 Duty;                                            //variable para ajustar el valor del PWM
+.................... int1 SUBE;
+.................... 
+.................... #int_TIMER0
+.................... 
+.................... void TIMER0_isr()
+.................... 
+.................... {
+.................... output_high( PIN_C2);                                 
+*
+20AE:  BCF    F94.2
+20B0:  BSF    F8B.2
+.................... SUBE=1;
+20B2:  BSF    1B.0
+.................... set_timer0(5780);                                    
+20B4:  MOVLW  16
+20B6:  MOVWF  FD7
+20B8:  MOVLW  94
+20BA:  MOVWF  FD6
+20BC:  NOP   
+.................... 
+20BE:  BCF    FF2.2
+20C0:  GOTO   2060
+.................... }
+.................... 
+.................... void main()
+*
+20E4:  CLRF   FF8
+20E6:  BCF    FD0.7
+20E8:  BSF    07.7
+20EA:  MOVLW  70
+20EC:  MOVWF  FD3
+20EE:  CLRF   FD2
+20F0:  CLRF   F9B
+20F2:  MOVLB  F
+20F4:  CLRF   x5B
+20F6:  CLRF   x5C
+20F8:  CLRF   x5D
+20FA:  CLRF   x5E
+20FC:  CLRF   x5F
+20FE:  CLRF   F9A
+2100:  CLRF   F99
+2102:  CLRF   F98
+.................... 
+.................... {
+.................... 
+....................   set_tris_c (0xFB);                                 //salida de pulsos
+2104:  MOVLW  FB
+2106:  MOVWF  F94
+....................   setup_timer_0 (T0_INTERNAL|T0_DIV_4);
+2108:  MOVLW  81
+210A:  MOVWF  FD5
+....................   enable_interrupts (int_TIMER0) ;
+210C:  BSF    FF2.5
+....................   enable_interrupts (GLOBAL) ;
+210E:  MOVLW  C0
+2110:  IORWF  FF2,F
+....................   setup_adc_ports (sAN0);                            //configuracion deL canal ADC en A0
+2112:  MOVF   FC1,W
+2114:  ANDLW  F0
+2116:  MOVWF  FC1
+2118:  MOVLW  01
+211A:  MOVWF  x5B
+211C:  MOVLW  00
+211E:  MOVWF  x5F
+2120:  MOVWF  x5C
+2122:  MOVWF  x5D
+2124:  MOVWF  x5E
+....................   setup_adc (ADC_CLOCK_INTERNAL);
+2126:  MOVF   FC0,W
+2128:  ANDLW  C0
+212A:  IORLW  07
+212C:  MOVWF  FC0
+212E:  BSF    FC0.7
+2130:  BSF    FC2.0
+....................   set_adc_channel (0);                               //conversion analogica por canal 0
+2132:  MOVLW  00
+2134:  MOVWF  01
+2136:  MOVF   FC2,W
+2138:  ANDLW  83
+213A:  IORWF  01,W
+213C:  MOVWF  FC2
+.................... 
+....................     while(1)
+.................... 
+....................          {
+.................... 
+....................                 if (SUBE == 1)
+213E:  BTFSS  1B.0
+2140:  BRA    2168
+.................... 
+....................                {
+....................                     delay_us (DUTY);
+2142:  MOVFF  1A,1C
+2146:  INCF   1C,F
+2148:  DECF   1C,F
+214A:  BTFSC  FD8.2
+214C:  BRA    2158
+214E:  SETF   1D
+2150:  MOVLB  0
+2152:  RCALL  20C4
+2154:  MOVLB  F
+2156:  BRA    2148
+2158:  MOVFF  19,1D
+215C:  MOVLB  0
+215E:  RCALL  20C4
+....................                     output_low (PIN_C2) ;
+2160:  BCF    F94.2
+2162:  BCF    F8B.2
+....................                      SUBE = 0;
+2164:  BCF    1B.0
+2166:  MOVLB  F
+....................                  }
+.................... 
+....................                   if (SUBE == 0)
+2168:  BTFSC  1B.0
+216A:  BRA    2188
+....................                       {
+....................                           DUTY = read_adc ();              //lectura del potenciometro
+216C:  BSF    FC2.1
+216E:  BTFSC  FC2.1
+2170:  BRA    216E
+2172:  MOVFF  FC4,1A
+2176:  MOVFF  FC3,19
+....................                           DUTY = DUTY * 2;                 //ajuste de rango
+217A:  BCF    FD8.0
+217C:  RLCF   19,F
+217E:  RLCF   1A,F
+....................                           DUTY += 500;
+2180:  MOVLW  F4
+2182:  ADDWF  19,F
+2184:  MOVLW  01
+2186:  ADDWFC 1A,F
+....................                           }
+.................... 
+....................                            while (SUBE == 0) ;
+2188:  BTFSS  1B.0
+218A:  BRA    2188
+218C:  BRA    213E
+.................... 
+....................                 }
+.................... 
+.................... }
+218E:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

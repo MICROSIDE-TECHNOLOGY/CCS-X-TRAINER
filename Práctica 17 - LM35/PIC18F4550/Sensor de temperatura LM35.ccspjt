@@ -1,0 +1,41 @@
+[PROJECT]
+Target=Sensor de temperatura LM35.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Sensor de temperatura LM35.c
+[Sensor de temperatura LM35.c]
+Type=4
+[mru-list]
+1=Sensor de temperatura LM35.c
+
+[defines]
+buildcount=2
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[66541]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[50465]Project Opened.
+D2_L2=[50474]Started Editing.
+D2_L3=[50490]Stopped Editing.
+TotalEdit=1
+TotalDebug=0
+D2_E=1
+D2_D=0
+D2_L4=[50490]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=Sensor de temperatura LM35.c
+t1=1
+Count=1
+[Units]
+Count=1
+1=Sensor de temperatura LM35 (main)

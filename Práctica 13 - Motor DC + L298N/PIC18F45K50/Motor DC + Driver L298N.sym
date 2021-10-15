@@ -1,0 +1,69 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 VELOCIDAD
+006.0   SUBE
+007     main.@SCRATCH1
+008     @delay_ms1.P1
+F78.6   C2OUT
+F79.6   C1OUT
+F90     CCP_2_LOW
+F90     CCP_2
+F91     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P1
+FF6-FF8 @READ_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  @delay_ms1
+002030  @cinit1
+002030  main
+002054  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 13 - Motor DC + L298N\Proyecto\PIC18F45K50\
+
+Project Files:
+    Motor DC + Driver L298N.c                               [27-sep.-21 13:46  CRC=69403F07]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F45K50.h [12-jul.-21 11:39  CRC=D2529886]
+
+Source signature=0DE57013
+Program memory checksum=0000
+Hex file CRC=9479
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 13 - Motor DC + L298N\Proyecto\PIC18F45K50\Motor DC + Driver L298N (main)
+
+Compiler Settings:
+    Processor:      PIC18F45K50
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Motor DC + Driver L298N.xsym
+    Errors:      Motor DC + Driver L298N.err
+    Ext Symbols: Motor DC + Driver L298N.esym
+    INHX32:      Motor DC + Driver L298N.hex
+    Symbols:     Motor DC + Driver L298N.sym
+    List:        Motor DC + Driver L298N.lst
+    Debug/COFF:  Motor DC + Driver L298N.cof
+    Project:     Motor DC + Driver L298N.ccspjt
+    Call Tree:   Motor DC + Driver L298N.tre
+    Statistics:  Motor DC + Driver L298N.STA

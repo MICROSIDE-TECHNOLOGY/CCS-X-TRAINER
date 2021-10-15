@@ -1,0 +1,47 @@
+
+ROM used:   266/32768 (1%)
+            270/32768 (1%) including unused fragments
+
+            0.3 Average locations per line
+            11.1 Average locations per statement
+
+RAM used:   6/2048 (0%) at main() level
+            7/2048 (0%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   80    24 100  LED RGB.c
+  877     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h
+----- -----
+  957    24 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     40   8    1             @delay_ms1
+0    134  25    0    221  4.1  Set_PWM
+0     88  17    0    352  2.8  MAIN
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               2
+    Statements              24
+    Comments                198
+    Volume (V)              686
+    Difficulty (D)          6.7
+    Effort to implement (E) 4587
+    Time to implement (T)   4 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    115
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-07FFE   262  24306  
+
+
+

@@ -1,0 +1,53 @@
+[PROJECT]
+Target=Push Button.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Push Button.c
+[Push Button.c]
+Type=4
+[mru-list]
+1=Push Button.c
+
+[defines]
+buildcount=4
+
+[Opened Files]
+1=Push Button.c
+t1=17
+Count=1
+
+[ProjectLog]
+Days=3
+D1=01-12-2020
+D1_L=1
+D1_L1=[35378]Project Closed.
+D2=27-09-2021
+D2_L=8
+D2_L1=[41675]Project Opened.
+D2_L2=[41692]Started Editing.
+D2_L3=[41804]Stopped Editing.
+TotalEdit=4
+TotalDebug=0
+D2_E=3
+D2_D=0
+D2_L4=[41804]Project Closed.
+D2_L5=[42077]Project Opened.
+D2_L6=[42091]Started Editing.
+D2_L7=[42111]Stopped Editing.
+D2_L8=[42111]Project Closed.
+D3=05-10-2021
+D3_L=4
+D3_L1=[50108]Project Opened.
+D3_L2=[50132]Started Editing.
+D3_L3=[50432]Stopped Editing.
+D3_E=1
+D3_D=0
+D3_L4=[51103]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=Push Button (main)

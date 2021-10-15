@@ -1,0 +1,11 @@
+ÀÄLED RGB
+   ÀÄMAIN  0/88  Ram=0
+      ÃÄ@cinit1  (Inline)  Ram=0
+      ÃÄ@cinit2  (Inline)  Ram=0
+      ÃÄSet_PWM  0/134  Ram=0
+      ³  ÃÄ@delay_ms1  0/40  Ram=1
+      ³  ÀÄ@delay_ms1  0/40  Ram=1
+      ÃÄSet_PWM  0/134  Ram=0
+      ³  ÀÄ*
+      ÀÄSet_PWM  0/134  Ram=0
+         ÀÄ*

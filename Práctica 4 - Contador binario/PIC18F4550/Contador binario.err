@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica-4-Contador-binario\Práctica 4 - Contador binario\Proyecto\PIC18F4550\Contador binario on 27-sep.-21 at 11:55
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica-4-Contador-binario\Práctica 4 - Contador binario\Proyecto\PIC18F4550\Contador binario.c" Line 33(1,1): Condition always TRUE
+      Memory usage:   ROM=0%      RAM=0% - 0%
+      0 Errors,  1 Warnings.
+Build Successful.

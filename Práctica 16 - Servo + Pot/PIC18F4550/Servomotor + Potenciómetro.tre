@@ -1,0 +1,7 @@
+ÀÄServomotor + Potenciómetro
+   ÃÄMAIN  0/144  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@cinit2  (Inline)  Ram=0
+   ³  ÃÄ@delay_us1  0/32  Ram=1
+   ³  ÀÄ@delay_us1  0/32  Ram=1
+   ÀÄTIMER0_isr  0/22  Ram=0

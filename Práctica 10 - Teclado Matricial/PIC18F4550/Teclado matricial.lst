@@ -1,0 +1,411 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               11-oct.-21 16:57
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 10 - Teclado Matricial\Proyecto\PIC18F4550\Teclado matricial.lst
+
+               ROM used:   404 bytes (1%)
+                           Largest free fragment is 24168
+               RAM used:   9 (0%) at main() level
+                           13 (1%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2160
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... En esta práctica se realiza el control de encendido o apagado de un LED 
+.................... mediante un teclado matricial,  que al presionar la tecla 1 se enciende 
+.................... el LED y al presionar la tecla 0 se apagará el LED.
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F4550.h>                            //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F4550 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F4550
+*
+2008:  CLRF   FF7
+200A:  ADDLW  18
+200C:  MOVWF  FF6
+200E:  MOVLW  20
+2010:  ADDWFC FF7,F
+2012:  TBLRD*+
+2014:  MOVF   FF5,W
+2016:  RETURN 0
+2018:  DATA 31,32
+201A:  DATA 33,41
+201C:  DATA 34,35
+201E:  DATA 36,42
+2020:  DATA 37,38
+2022:  DATA 39,43
+2024:  DATA 2A,30
+2026:  DATA 23,44
+*
+213E:  ADDWF  FE8,W
+2140:  CLRF   FF7
+2142:  RLCF   FF7,F
+2144:  ADDLW  59
+2146:  MOVWF  FF6
+2148:  MOVLW  21
+214A:  ADDWFC FF7,F
+214C:  TBLRD*-
+214E:  MOVF   FF5,W
+2150:  MOVWF  FFA
+2152:  TBLRD*
+2154:  MOVF   FF5,W
+2156:  MOVWF  FF9
+2158:  DATA 7E,20
+215A:  DATA 90,20
+215C:  DATA A2,20
+215E:  DATA B4,20
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=48Mhz, crystal)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #build(reset=0x02000,interrupt=0x02008)         //Asignación de los vectores de reset e interrupción
+.................... #org 0x0000,0x1FFF {}                           //Reserva espacio en la memoria para la versión con bootloader
+.................... 
+.................... #define LED PIN_A4                              //Pin donde está conectado el LED de X-TRAINER
+.................... char TECLA_PRESS;
+.................... 
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... CONFIGURACIÓN DE PINES TECLADO
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #define row0 PIN_B0                             //Filas del teclado colocar resistencia pullup
+.................... #define row1 PIN_B1                             //Filas del teclado colocar resistencia pullup
+.................... #define row2 PIN_B2                             //Filas del teclado colocar resistencia pullup
+.................... #define row3 PIN_B3                             //Filas del teclado colocar resistencia pullup
+.................... #define col0 PIN_B4                             //Columnas del teclado
+.................... #define col1 PIN_B5                             //Columnas del teclado
+.................... #define col2 PIN_B6                             //Columnas del teclado
+.................... #define col3 PIN_B7                             //Columnas del teclado
+.................... 
+.................... #include "Teclado4x4.h"                         //Librería de teclado
+.................... 
+.................... // Asignacion de los caracteres a las teclas 
+.................... char const KEYS[4][4] =
+.................... {{'1','2','3','A'},
+....................  {'4','5','6','B'},
+....................  {'7','8','9','C'},
+....................  {'*','0','#','D'}};
+.................... 
+.................... 
+.................... #define KBD_DEBOUNCE_FACTOR 3 // Set this number to apx n/333 where
+.................... // n is the number of times you expect
+.................... // to call kbd_getc each second
+.................... 
+.................... void kbd_init()
+.................... {
+....................  set_tris_b(0x0F);   // B7-B4 columnas, B3-B0 filas
+*
+2028:  MOVLW  0F
+202A:  MOVWF  F93
+202C:  GOTO   217A (RETURN)
+....................  // port_b_pullups(true); 
+.................... }
+.................... 
+.................... short int ALL_ROWS (void)
+.................... {
+.................... if(input (row0) & input (row1) & input (row2) & input (row3))
+2030:  BSF    F93.0
+2032:  MOVLW  00
+2034:  BTFSC  F81.0
+2036:  MOVLW  01
+2038:  MOVWF  0B
+203A:  BSF    F93.1
+203C:  MOVLW  00
+203E:  BTFSC  F81.1
+2040:  MOVLW  01
+2042:  ANDWF  0B,F
+2044:  BSF    F93.2
+2046:  MOVLW  00
+2048:  BTFSC  F81.2
+204A:  MOVLW  01
+204C:  ANDWF  0B,F
+204E:  BSF    F93.3
+2050:  MOVLW  00
+2052:  BTFSC  F81.3
+2054:  MOVLW  01
+2056:  ANDWF  0B,W
+2058:  BZ    2062
+....................    return (0);
+205A:  MOVLW  00
+205C:  MOVWF  01
+205E:  BRA    2066
+2060:  BRA    2066
+.................... else
+....................    return (1);
+2062:  MOVLW  01
+2064:  MOVWF  01
+2066:  RETURN 0
+.................... }
+.................... 
+.................... 
+.................... 
+.................... char kbd_getc()
+.................... {
+.................... static byte kbd_call_count;
+.................... static short int kbd_down;
+.................... static char last_key;
+.................... static byte col;
+.................... 
+.................... byte kchar;
+.................... byte row;
+.................... 
+.................... kchar='\0';
+2068:  CLRF   09
+.................... 
+.................... if(++kbd_call_count>KBD_DEBOUNCE_FACTOR)
+206A:  INCF   05,F
+206C:  MOVF   05,W
+206E:  SUBLW  03
+2070:  BC    2136
+....................   {
+....................    switch (col)
+2072:  MOVF   08,W
+2074:  ADDLW  FC
+2076:  BC    20C4
+2078:  ADDLW  04
+207A:  GOTO   213E
+....................      {
+....................       case 0:
+....................         output_low(col0);
+207E:  BCF    F93.4
+2080:  BCF    F8A.4
+....................         output_high(col1);
+2082:  BCF    F93.5
+2084:  BSF    F8A.5
+....................         output_high(col2);
+2086:  BCF    F93.6
+2088:  BSF    F8A.6
+....................         output_high(col3);
+208A:  BCF    F93.7
+208C:  BSF    F8A.7
+....................         break;
+208E:  BRA    20C4
+....................    
+....................       case 1:
+....................         output_high(col0);
+2090:  BCF    F93.4
+2092:  BSF    F8A.4
+....................         output_low(col1);
+2094:  BCF    F93.5
+2096:  BCF    F8A.5
+....................         output_high(col2);
+2098:  BCF    F93.6
+209A:  BSF    F8A.6
+....................         output_high(col3);
+209C:  BCF    F93.7
+209E:  BSF    F8A.7
+....................         break;
+20A0:  BRA    20C4
+.................... 
+....................       case 2:
+....................         output_high(col0);
+20A2:  BCF    F93.4
+20A4:  BSF    F8A.4
+....................         output_high(col1);
+20A6:  BCF    F93.5
+20A8:  BSF    F8A.5
+....................         output_low(col2);
+20AA:  BCF    F93.6
+20AC:  BCF    F8A.6
+....................         output_high(col3);
+20AE:  BCF    F93.7
+20B0:  BSF    F8A.7
+....................         break;
+20B2:  BRA    20C4
+.................... 
+....................       case 3:
+....................         output_high(col0);
+20B4:  BCF    F93.4
+20B6:  BSF    F8A.4
+....................         output_high(col1);
+20B8:  BCF    F93.5
+20BA:  BSF    F8A.5
+....................         output_high(col2);
+20BC:  BCF    F93.6
+20BE:  BSF    F8A.6
+....................         output_low(col3);
+20C0:  BCF    F93.7
+20C2:  BCF    F8A.7
+....................         break;
+....................       }
+.................... 
+....................    if(kbd_down)
+20C4:  BTFSS  06.0
+20C6:  BRA    20D8
+....................      {
+....................       if(!ALL_ROWS())
+20C8:  RCALL  2030
+20CA:  MOVF   01,F
+20CC:  BNZ   20D6
+....................         {
+....................          kbd_down=false;
+20CE:  BCF    06.0
+....................          kchar=last_key;
+20D0:  MOVFF  07,09
+....................          last_key='\0';
+20D4:  CLRF   07
+....................         }
+....................      }
+20D6:  BRA    2134
+....................    else
+....................      {
+....................       if(ALL_ROWS())
+20D8:  RCALL  2030
+20DA:  MOVF   01,F
+20DC:  BZ    212A
+....................         {
+....................          if(!input (row0))
+20DE:  BSF    F93.0
+20E0:  BTFSC  F81.0
+20E2:  BRA    20E8
+....................             row=0;
+20E4:  CLRF   0A
+20E6:  BRA    210A
+....................          else if(!input (row1))
+20E8:  BSF    F93.1
+20EA:  BTFSC  F81.1
+20EC:  BRA    20F4
+....................             row=1;
+20EE:  MOVLW  01
+20F0:  MOVWF  0A
+20F2:  BRA    210A
+....................          else if(!input (row2))
+20F4:  BSF    F93.2
+20F6:  BTFSC  F81.2
+20F8:  BRA    2100
+....................             row=2;
+20FA:  MOVLW  02
+20FC:  MOVWF  0A
+20FE:  BRA    210A
+....................          else if(!input (row3))
+2100:  BSF    F93.3
+2102:  BTFSC  F81.3
+2104:  BRA    210A
+....................             row=3;
+2106:  MOVLW  03
+2108:  MOVWF  0A
+.................... 
+....................          last_key =KEYS[row][col];
+210A:  MOVF   0A,W
+210C:  MULLW  04
+210E:  MOVF   FF3,W
+2110:  CLRF   0C
+2112:  MOVWF  0B
+2114:  CLRF   03
+2116:  MOVF   08,W
+2118:  ADDWF  0B,W
+211A:  MOVWF  01
+211C:  MOVF   0C,W
+211E:  ADDWFC 03,F
+2120:  MOVF   01,W
+2122:  RCALL  2008
+2124:  MOVWF  07
+....................          kbd_down = true;
+2126:  BSF    06.0
+....................         }
+2128:  BRA    2134
+....................       else
+....................         {
+....................          ++col;
+212A:  INCF   08,F
+....................          if(col==4)
+212C:  MOVF   08,W
+212E:  SUBLW  04
+2130:  BNZ   2134
+....................             col=0;
+2132:  CLRF   08
+....................         }
+....................      }
+....................    kbd_call_count=0;
+2134:  CLRF   05
+....................   }
+.................... return(kchar);
+2136:  MOVFF  09,01
+213A:  GOTO   217C (RETURN)
+.................... }
+.................... 
+.................... //=========================== 
+.................... 
+.................... 
+.................... void main()
+*
+2160:  CLRF   FF8
+2162:  BCF    FD0.7
+2164:  MOVF   FC1,W
+2166:  ANDLW  C0
+2168:  IORLW  0F
+216A:  MOVWF  FC1
+216C:  MOVLW  07
+216E:  MOVWF  FB4
+2170:  CLRF   05
+2172:  BCF    06.0
+2174:  CLRF   07
+2176:  CLRF   08
+.................... 
+.................... {
+.................... 
+....................     kbd_init ();                                //inicialización del teclado.
+2178:  BRA    2028
+.................... 
+....................     while(TRUE)
+....................       {
+....................         TECLA_PRESS = kbd_getc () ;
+217A:  BRA    2068
+217C:  MOVFF  01,04
+.................... 
+....................          if (TECLA_PRESS == '1')
+2180:  MOVF   04,W
+2182:  SUBLW  31
+2184:  BNZ   218A
+....................           {
+....................             output_HIGH (LED);                  //Cambio de estado en el pin RA1
+2186:  BCF    F92.4
+2188:  BSF    F89.4
+....................           }
+.................... 
+....................           if (TECLA_PRESS == '0')
+218A:  MOVF   04,W
+218C:  SUBLW  30
+218E:  BNZ   2194
+....................          {
+....................              output_LOW (LED);                  //Cambio de estado en el pin RA1
+2190:  BCF    F92.4
+2192:  BCF    F89.4
+....................           }
+2194:  BRA    217A
+....................     }
+.................... }
+2196:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CC07   PLL12 CPUDIV1 NOUSBDIV HS FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV21 VREGEN NOWDT WDT32768
+   Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

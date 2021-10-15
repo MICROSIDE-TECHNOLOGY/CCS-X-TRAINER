@@ -1,0 +1,336 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               27-sep.-21 13:49
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 13 - Motor DC + L298N\Proyecto\PIC18F4550\Motor DC + Driver L298N.lst
+
+               ROM used:   444 bytes (1%)
+                           Largest free fragment is 24128
+               RAM used:   8 (0%) at main() level
+                           9 (0%) worst case
+               Stack used: 1 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2030
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Esta práctica consiste en variar la velocidad de un motor usando el módulo
+.................... PWM.
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F4550.h>                            //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F4550 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F4550
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=48Mhz, crystal)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+2008:  CLRF   FEA
+200A:  MOVLW  08
+200C:  MOVWF  FE9
+200E:  MOVF   FEF,W
+2010:  BZ    202E
+2012:  MOVLW  0F
+2014:  MOVWF  01
+2016:  CLRF   00
+2018:  DECFSZ 00,F
+201A:  BRA    2018
+201C:  DECFSZ 01,F
+201E:  BRA    2016
+2020:  MOVLW  8F
+2022:  MOVWF  00
+2024:  DECFSZ 00,F
+2026:  BRA    2024
+2028:  NOP   
+202A:  DECFSZ FEF,F
+202C:  BRA    2012
+202E:  RETURN 0
+.................... #build(reset=0x02000,interrupt=0x02008)         //Asignación de los vectores de reset e interrupción
+.................... #org 0x0000,0x1FFF {}                           //Reserva espacio en la memoria para la versión con bootloader
+.................... 
+.................... #define IN_1 pin_C0
+.................... #define IN_2 pin_C1
+.................... 
+.................... int16 VELOCIDAD=0;                              //Variable para ajustar el valor del PWM1 en CCP1
+.................... 
+.................... int1 SUBE=1;                                    //Variable para control de ascenso y descenso del valor del PWM
+.................... 
+.................... void main()
+2030:  CLRF   FF8
+2032:  BCF    FD0.7
+2034:  CLRF   05
+2036:  CLRF   04
+2038:  BSF    06.0
+203A:  MOVF   FC1,W
+203C:  ANDLW  C0
+203E:  IORLW  0F
+2040:  MOVWF  FC1
+2042:  MOVLW  07
+2044:  MOVWF  FB4
+.................... {
+....................       setup_timer_2 (T2_DIV_BY_16, 255, 1);                            //Configura Timer2, periodo ajustado a 342uS
+2046:  MOVLW  00
+2048:  IORLW  06
+204A:  MOVWF  FCA
+204C:  MOVLW  FF
+204E:  MOVWF  FCB
+....................       setup_ccp1 (CCP_PWM|CCP_SHUTDOWN_AC_L|CCP_SHUTDOWN_BD_L);        //Configura el módulo CCP para uso del PWM
+2050:  BCF    F94.2
+2052:  BCF    F8B.2
+2054:  MOVLW  0C
+2056:  MOVWF  FBD
+2058:  CLRF   FB7
+205A:  CLRF   FB6
+....................       while (TRUE)
+....................             {
+....................                 output_bit (IN_1, 1);                                  //Dirección del motor
+205C:  BSF    F8B.0
+205E:  BCF    F94.0
+....................                 output_bit (IN_2, 0) ;
+2060:  BCF    F8B.1
+2062:  BCF    F94.1
+....................                 SUBE = 1;
+2064:  BSF    06.0
+.................... 
+....................                  while (VELOCIDAD < 1020&&SUBE)
+2066:  MOVF   05,W
+2068:  SUBLW  03
+206A:  BNC   20AE
+206C:  BNZ   2074
+206E:  MOVF   04,W
+2070:  SUBLW  FB
+2072:  BNC   20AE
+2074:  BTFSS  06.0
+2076:  BRA    20AE
+....................                        {
+....................                                                                        //Se va incrementando del valor en el PWM hasta el máximo
+....................                               VELOCIDAD += 5;                          //Se incrementa en pasos de 15 el ciclo de trabajo
+2078:  MOVLW  05
+207A:  ADDWF  04,F
+207C:  MOVLW  00
+207E:  ADDWFC 05,F
+....................                               set_pwm1_duty (VELOCIDAD);               
+2080:  MOVFF  05,02
+2084:  MOVFF  04,01
+2088:  RRCF   02,F
+208A:  RRCF   01,F
+208C:  RRCF   02,F
+208E:  RRCF   01,F
+2090:  RRCF   02,F
+2092:  MOVFF  01,FBE
+2096:  RRCF   02,F
+2098:  RRCF   02,W
+209A:  ANDLW  30
+209C:  MOVWF  00
+209E:  MOVF   FBD,W
+20A0:  ANDLW  CF
+20A2:  IORWF  00,W
+20A4:  MOVWF  FBD
+....................                               delay_ms (40);                           //retardo
+20A6:  MOVLW  28
+20A8:  MOVWF  08
+20AA:  RCALL  2008
+20AC:  BRA    2066
+....................                         }
+.................... 
+....................                      SUBE = 0;
+20AE:  BCF    06.0
+.................... 
+....................                  while (VELOCIDAD > 5&& ! SUBE)
+20B0:  MOVF   05,F
+20B2:  BNZ   20BA
+20B4:  MOVF   04,W
+20B6:  SUBLW  05
+20B8:  BC    20F4
+20BA:  BTFSC  06.0
+20BC:  BRA    20F4
+....................                           {
+....................                                                                         //Se va reduciendo el valor en el PWM hasta el mí­nimo
+....................                                   VELOCIDAD -= 5;                       //Se reduce en pasos de 15 el ciclo de trabajo
+20BE:  MOVLW  05
+20C0:  SUBWF  04,F
+20C2:  MOVLW  00
+20C4:  SUBWFB 05,F
+....................                                   set_pwm1_duty (VELOCIDAD);            
+20C6:  MOVFF  05,02
+20CA:  MOVFF  04,01
+20CE:  RRCF   02,F
+20D0:  RRCF   01,F
+20D2:  RRCF   02,F
+20D4:  RRCF   01,F
+20D6:  RRCF   02,F
+20D8:  MOVFF  01,FBE
+20DC:  RRCF   02,F
+20DE:  RRCF   02,W
+20E0:  ANDLW  30
+20E2:  MOVWF  00
+20E4:  MOVF   FBD,W
+20E6:  ANDLW  CF
+20E8:  IORWF  00,W
+20EA:  MOVWF  FBD
+....................                                   delay_ms (40) ;
+20EC:  MOVLW  28
+20EE:  MOVWF  08
+20F0:  RCALL  2008
+20F2:  BRA    20B0
+....................                             }
+.................... 
+....................                             SUBE = 1;
+20F4:  BSF    06.0
+....................                             output_bit (IN_1, 0);                       //Alto del motor
+20F6:  BCF    F8B.0
+20F8:  BCF    F94.0
+....................                             output_bit (IN_2, 0);
+20FA:  BCF    F8B.1
+20FC:  BCF    F94.1
+....................                             delay_ms (1000) ;
+20FE:  MOVLW  04
+2100:  MOVWF  07
+2102:  MOVLW  FA
+2104:  MOVWF  08
+2106:  RCALL  2008
+2108:  DECFSZ 07,F
+210A:  BRA    2102
+.................... 
+....................                            output_bit (IN_1, 0);                        //Dirección del motor
+210C:  BCF    F8B.0
+210E:  BCF    F94.0
+....................                            output_bit (IN_2, 1) ;
+2110:  BSF    F8B.1
+2112:  BCF    F94.1
+....................                             SUBE = 1;
+2114:  BSF    06.0
+.................... 
+....................                     while (VELOCIDAD < 1020&&SUBE)
+2116:  MOVF   05,W
+2118:  SUBLW  03
+211A:  BNC   215E
+211C:  BNZ   2124
+211E:  MOVF   04,W
+2120:  SUBLW  FB
+2122:  BNC   215E
+2124:  BTFSS  06.0
+2126:  BRA    215E
+....................                              {
+....................                                                                          //Se va incrementando del valor en el PWM hasta el máximo
+....................                                    VELOCIDAD += 5;                       //Se incrementa en pasos de 15 el ciclo de trabajo
+2128:  MOVLW  05
+212A:  ADDWF  04,F
+212C:  MOVLW  00
+212E:  ADDWFC 05,F
+....................                                    set_pwm1_duty (VELOCIDAD);            
+2130:  MOVFF  05,02
+2134:  MOVFF  04,01
+2138:  RRCF   02,F
+213A:  RRCF   01,F
+213C:  RRCF   02,F
+213E:  RRCF   01,F
+2140:  RRCF   02,F
+2142:  MOVFF  01,FBE
+2146:  RRCF   02,F
+2148:  RRCF   02,W
+214A:  ANDLW  30
+214C:  MOVWF  00
+214E:  MOVF   FBD,W
+2150:  ANDLW  CF
+2152:  IORWF  00,W
+2154:  MOVWF  FBD
+....................                                    delay_ms (40);                       
+2156:  MOVLW  28
+2158:  MOVWF  08
+215A:  RCALL  2008
+215C:  BRA    2116
+....................                               }
+.................... 
+....................                              SUBE = 0;
+215E:  BCF    06.0
+.................... 
+....................                       while (VELOCIDAD > 5&& ! SUBE)
+2160:  MOVF   05,F
+2162:  BNZ   216A
+2164:  MOVF   04,W
+2166:  SUBLW  05
+2168:  BC    21A4
+216A:  BTFSC  06.0
+216C:  BRA    21A4
+....................                                {
+....................                                                                          //Se va reduciendo el valor en el PWM hasta el mínimo
+....................                                      VELOCIDAD -= 5;                     //Se reduce en pasos de 15 el ciclo de trabajo
+216E:  MOVLW  05
+2170:  SUBWF  04,F
+2172:  MOVLW  00
+2174:  SUBWFB 05,F
+....................                                      set_pwm1_duty (VELOCIDAD);          
+2176:  MOVFF  05,02
+217A:  MOVFF  04,01
+217E:  RRCF   02,F
+2180:  RRCF   01,F
+2182:  RRCF   02,F
+2184:  RRCF   01,F
+2186:  RRCF   02,F
+2188:  MOVFF  01,FBE
+218C:  RRCF   02,F
+218E:  RRCF   02,W
+2190:  ANDLW  30
+2192:  MOVWF  00
+2194:  MOVF   FBD,W
+2196:  ANDLW  CF
+2198:  IORWF  00,W
+219A:  MOVWF  FBD
+....................                                      delay_ms (40) ;
+219C:  MOVLW  28
+219E:  MOVWF  08
+21A0:  RCALL  2008
+21A2:  BRA    2160
+....................                                 }
+.................... 
+....................                           SUBE = 1;
+21A4:  BSF    06.0
+....................                           output_bit (IN_1, 0);                          //Alto del motor
+21A6:  BCF    F8B.0
+21A8:  BCF    F94.0
+....................                           output_bit (IN_2, 0);
+21AA:  BCF    F8B.1
+21AC:  BCF    F94.1
+.................... 
+....................                           delay_ms (500) ;
+21AE:  MOVLW  02
+21B0:  MOVWF  07
+21B2:  MOVLW  FA
+21B4:  MOVWF  08
+21B6:  RCALL  2008
+21B8:  DECFSZ 07,F
+21BA:  BRA    21B2
+21BC:  BRA    205C
+....................             }
+.................... }
+21BE:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CC07   PLL12 CPUDIV1 NOUSBDIV HS FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV21 VREGEN NOWDT WDT32768
+   Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

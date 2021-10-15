@@ -1,0 +1,164 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-007 temperatura
+008     lcd_init.i
+008-00B @PRINTF_L32D_773FPFPF.P1
+008     @PSTRINGCN_773.P2
+008     ds1820_read.busy
+008     MAIN.@SCRATCH1
+009     ds1820_read.temp1
+009     lcd_init.@SCRATCH1
+009     @PSTRINGCN_773.@SCRATCH1
+00A     ds1820_read.temp2
+00A     @PSTRINGCN_773.@SCRATCH2
+00B-00C ds1820_read.temp3
+00C     @PRINTF_L32D_773FPFPF.P1
+00D-010 ds1820_read.result
+00D     @PRINTF_L32D_773FPFPF.@SCRATCH1
+00E     @PRINTF_L32D_773FPFPF.@SCRATCH2
+00F     @PRINTF_L32D_773FPFPF.@SCRATCH3
+010     @PRINTF_L32D_773FPFPF.@SCRATCH4
+011     onewire_read.count
+011-012 @SITOF.P1
+011     onewire_write.data
+011     onewire_reset.@SCRATCH1
+011     ds1820_read.@SCRATCH1
+011     @PRINTF_L32D_773FPFPF.@SCRATCH5
+012     onewire_read.data
+012     onewire_write.count
+012     ds1820_read.@SCRATCH2
+012     @PRINTF_L32D_773FPFPF.@SCRATCH6
+013     @delay_us1.P1
+013     ds1820_read.@SCRATCH3
+013     @PRINTF_L32D_773FPFPF.@SCRATCH7
+014     ds1820_read.@SCRATCH4
+014     @PRINTF_L32D_773FPFPF.@SCRATCH8
+015     lcd_putc.c
+015-018 @DIV3232.P1
+015-018 @MULFF.P2
+015-018 @FTOSD.P3
+015-018 @DIVFF.P4
+016     @delay_ms1.P1
+016     lcd_gotoxy.x
+017     lcd_gotoxy.y
+018     lcd_gotoxy.address
+019-01C @DIV3232.P1
+019-01C @DIVFF.P2
+019-01C @MULFF.P3
+019     lcd_gotoxy.@SCRATCH1
+019     @FTOSD.@SCRATCH1
+01A     lcd_send_byte.address
+01B     lcd_send_byte.n
+01C     lcd_read_byte.low
+01C     lcd_send_byte.@SCRATCH1
+01D     lcd_send_nibble.nibble
+01D     lcd_read_byte.high
+01D     @DIVFF.@SCRATCH1
+01D     @MULFF.@SCRATCH1
+01D     @DIV3232.@SCRATCH1
+01E     lcd_read_nibble.retval
+01E.0   lcd_read_nibble.retval_0
+01E.1   lcd_read_nibble.retval_1
+01E.2   lcd_read_nibble.retval_2
+01E.3   lcd_read_nibble.retval_3
+01E     @DIVFF.@SCRATCH2
+01E     lcd_read_byte.@SCRATCH1
+01E     @MULFF.@SCRATCH2
+01E     @DIV3232.@SCRATCH2
+01F     @DIVFF.@SCRATCH3
+01F     @MULFF.@SCRATCH3
+01F     @DIV3232.@SCRATCH3
+020     @DIVFF.@SCRATCH4
+020     @DIV3232.@SCRATCH4
+021     @DIVFF.@SCRATCH5
+021     @DIV3232.@SCRATCH5
+022     @DIVFF.@SCRATCH6
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  LCD_INIT_STRING.call
+002018  LCD_INIT_STRING.data
+00201C  @const786.call
+002032  @delay_ms1
+00205A  lcd_send_nibble
+0020A0  lcd_read_nibble
+0020D2  lcd_read_byte
+0020F6  lcd_send_byte
+002138  lcd_init
+002186  @delay_us1
+0021A6  onewire_reset
+0021CC  onewire_write
+00220C  onewire_read
+00224C  @SITOF
+002296  @DIVFF
+0023F2  ds1820_read
+002490  lcd_gotoxy
+0024B4  lcd_putc
+0024F6  @PSTRINGCN_773
+002516  @MULFF
+00260A  @FTOSD
+00264A  @DIV3232
+0026D8  @PRINTF_L32D_773FPFPF
+002852  @cinit1
+002852  MAIN
+002862  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 18 - DS18B20\Proyecto\PIC18F4550\
+
+Project Files:
+    Sensor de temperatura DS18B20.c                         [27-sep.-21 14:04  CRC=13C81635]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+    1wire.c                                                 [19-ene.-19 16:33  CRC=7A9F9ED2]
+    ds1820.c                                                [14-ene.-11 15:49  CRC=DC1B0575]
+    flex_lcd.h                                              [30-abr.-08 14:08  CRC=282E02A0]
+
+Source signature=7A9D32AD
+Program memory checksum=0000
+Hex file CRC=E1E8
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 18 - DS18B20\Proyecto\PIC18F4550\Sensor de temperatura DS18B20 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Sensor de temperatura DS18B20.xsym
+    Errors:      Sensor de temperatura DS18B20.err
+    Ext Symbols: Sensor de temperatura DS18B20.esym
+    INHX32:      Sensor de temperatura DS18B20.hex
+    Symbols:     Sensor de temperatura DS18B20.sym
+    List:        Sensor de temperatura DS18B20.lst
+    Debug/COFF:  Sensor de temperatura DS18B20.cof
+    Project:     Sensor de temperatura DS18B20.ccspjt
+    Call Tree:   Sensor de temperatura DS18B20.tre
+    Statistics:  Sensor de temperatura DS18B20.STA

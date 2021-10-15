@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 17 - LM35\Proyecto\PIC18F45K50\Sensor de temperatura LM35 on 27-sep.-21 at 14:00
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 17 - LM35\Proyecto\PIC18F45K50\Sensor de temperatura LM35.c" Line 49(1,1): Condition always TRUE
+      Memory usage:   ROM=5%      RAM=0% - 2%
+      0 Errors,  1 Warnings.
+Build Successful.

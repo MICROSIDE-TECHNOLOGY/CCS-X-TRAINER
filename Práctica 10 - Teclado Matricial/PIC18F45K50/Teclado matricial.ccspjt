@@ -1,0 +1,51 @@
+[PROJECT]
+Target=Teclado matricial.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Teclado matricial.c
+[Teclado matricial.c]
+Type=4
+[mru-list]
+1=Teclado matricial.c
+
+[defines]
+buildcount=3
+
+[ProjectLog]
+Days=3
+D1=01-12-2020
+D1_L=1
+D1_L1=[41970]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[49203]Project Opened.
+D2_L2=[49210]Started Editing.
+D2_L3=[49256]Stopped Editing.
+TotalEdit=2
+TotalDebug=0
+D2_E=1
+D2_D=0
+D2_L4=[49256]Project Closed.
+D3=15-10-2021
+D3_L=6
+D3_L1=[60866]Project Opened.
+D3_L2=[60985]Started Editing.
+D3_L3=[61004]Stopped Editing.
+D3_E=1
+D3_D=0
+D3_L4=[61004]Project Closed.
+D3_L5=[61383]Project Opened.
+D3_L6=[61421]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=Teclado matricial.c
+t1=17
+Count=1
+[Units]
+Count=1
+1=Teclado matricial (main)

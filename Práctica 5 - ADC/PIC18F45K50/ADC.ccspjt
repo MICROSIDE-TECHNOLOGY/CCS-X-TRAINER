@@ -1,0 +1,45 @@
+[PROJECT]
+Target=ADC.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=ADC.c
+[ADC.c]
+Type=4
+[mru-list]
+1=ADC.c
+
+[defines]
+buildcount=3
+
+[Opened Files]
+1=ADC.c
+t1=1
+Count=1
+
+[ProjectLog]
+Days=2
+D1=01-12-2020
+D1_L=1
+D1_L1=[36119]Project Closed.
+D2=27-09-2021
+D2_L=8
+D2_L1=[43015]Project Opened.
+D2_L2=[43188]Started Editing.
+D2_L3=[43269]Stopped Editing.
+TotalEdit=3
+TotalDebug=0
+D2_E=3
+D2_D=0
+D2_L4=[43269]Project Closed.
+D2_L5=[43509]Project Opened.
+D2_L6=[43549]Started Editing.
+D2_L7=[43561]Stopped Editing.
+D2_L8=[43561]Project Closed.
+
+[fileformats]
+forcecoff=0
+[Units]
+Count=1
+1=ADC (main)

@@ -1,0 +1,140 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 distancia
+006-007 vtimer1
+008-00B tiempo
+00C-00F @SFTOI.P1
+00C     lcd_init.i
+00C-00F @MULFF.P1
+00C     @PSTRINGCN_755.P2
+00C-00D @ITOF.P3
+00C-00D @PRINTF_LU_755.P4
+00C     MAIN.@SCRATCH1
+00D     @delay_us1.P1
+00D     lcd_init.@SCRATCH1
+00D     MAIN.@SCRATCH2
+00D     @PSTRINGCN_755.@SCRATCH1
+00E     MAIN.@SCRATCH3
+00E     @PSTRINGCN_755.@SCRATCH2
+00E     @PRINTF_LU_755.@SCRATCH1
+00F     MAIN.@SCRATCH4
+00F     @PRINTF_LU_755.@SCRATCH2
+010-013 @MULFF.P1
+010-013 @ADDFF.P2
+010     @PRINTF_LU_755.@SCRATCH3
+011     @PRINTF_LU_755.@SCRATCH4
+012     @PRINTF_LU_755.@SCRATCH5
+013     @PRINTF_LU_755.@SCRATCH6
+014-017 @ADDFF.P1
+014     @MULFF.@SCRATCH1
+014     @PRINTF_LU_755.@SCRATCH7
+015     lcd_putc.c
+015     @MULFF.@SCRATCH2
+016     lcd_gotoxy.x
+016     @delay_ms1.P1
+016     @MULFF.@SCRATCH3
+017     lcd_gotoxy.y
+018     lcd_gotoxy.address
+018     @ADDFF.@SCRATCH1
+019     lcd_gotoxy.@SCRATCH1
+019     @ADDFF.@SCRATCH2
+01A     lcd_send_byte.address
+01A     @ADDFF.@SCRATCH3
+01B     lcd_send_byte.n
+01B     @ADDFF.@SCRATCH4
+01C     lcd_read_byte.low
+01C     lcd_send_byte.@SCRATCH1
+01C     @ADDFF.@SCRATCH5
+01D     lcd_send_nibble.nibble
+01D     lcd_read_byte.high
+01D     @ADDFF.@SCRATCH6
+01E     lcd_read_nibble.retval
+01E.0   lcd_read_nibble.retval_0
+01E.1   lcd_read_nibble.retval_1
+01E.2   lcd_read_nibble.retval_2
+01E.3   lcd_read_nibble.retval_3
+01E     lcd_read_byte.@SCRATCH1
+01E     @ADDFF.@SCRATCH7
+01F     @ADDFF.@SCRATCH8
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P1
+FE9-FEA @READ_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  LCD_INIT_STRING.call
+002018  LCD_INIT_STRING.data
+00201C  @const782.call
+002030  @delay_ms1
+002058  lcd_send_nibble
+00209E  lcd_read_nibble
+0020D0  lcd_read_byte
+0020F4  lcd_send_byte
+002136  lcd_init
+002184  @delay_us1
+0021A4  @ITOF
+0021DA  @MULFF
+0022CC  @ADDFF
+002538  @SFTOI
+002572  lcd_gotoxy
+002596  lcd_putc
+0025D8  @PSTRINGCN_755
+0025F6  @PRINTF_LU_755
+0026B2  MAIN
+0026B2  @cinit1
+0026C2  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 19 - BOOT_CCS\Práctica-19-BOOT_CCS\Proyecto\PIC18F4550\
+
+Project Files:
+    ULTRASONICO.c                                           [15-oct.-21 18:31  CRC=D5078785]
+    ..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+    flex_lcd.h                                              [30-abr.-08 14:08  CRC=282E02A0]
+
+Source signature=E521FFB6
+Program memory checksum=0000
+Hex file CRC=9059
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 19 - BOOT_CCS\Práctica-19-BOOT_CCS\Proyecto\PIC18F4550\ULTRASONICO (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   ULTRASONICO.xsym
+    Errors:      ULTRASONICO.err
+    Ext Symbols: ULTRASONICO.esym
+    INHX32:      ULTRASONICO.hex
+    Symbols:     ULTRASONICO.sym
+    List:        ULTRASONICO.lst
+    Debug/COFF:  ULTRASONICO.cof
+    Project:     ULTRASONICO.ccspjt
+    Call Tree:   ULTRASONICO.tre
+    Statistics:  ULTRASONICO.STA

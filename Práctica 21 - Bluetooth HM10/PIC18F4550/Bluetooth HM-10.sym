@@ -1,0 +1,72 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+004-005 @sprintf_string
+006     main.Caracter
+007     @PSTRINGC_9600_31766_31767.@SCRATCH1
+008     @PSTRINGC_9600_31766_31767.@SCRATCH2
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2
+FBB     CCP_2_LOW
+FBC     CCP_2_HIGH
+FBE     CCP_1
+FBE     CCP_1_LOW
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PROGRAM_MEMORY.P1
+FE9-FEA @WRITE_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PACKED_MEMORY.P3
+FE9-FEA @READ_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  @const738.call
+002018  @const743.call
+00202A  @PSTRINGC_9600_31766_31767
+00204C  main
+00204C  @cinit1
+002072  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 21 - Bluetooth HM10\Proyecto\PIC18F4550\
+
+Project Files:
+    Bluetooth HM-10.c                                       [15-oct.-21 17:27  CRC=2924A25F]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+
+Source signature=A8A18841
+Program memory checksum=0000
+Hex file CRC=F520
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 21 - Bluetooth HM10\Proyecto\PIC18F4550\Bluetooth HM-10 (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Bluetooth HM-10.xsym
+    Errors:      Bluetooth HM-10.err
+    Ext Symbols: Bluetooth HM-10.esym
+    INHX32:      Bluetooth HM-10.hex
+    Symbols:     Bluetooth HM-10.sym
+    List:        Bluetooth HM-10.lst
+    Debug/COFF:  Bluetooth HM-10.cof
+    Project:     Bluetooth HM-10.ccspjt
+    Call Tree:   Bluetooth HM-10.tre
+    Statistics:  Bluetooth HM-10.STA

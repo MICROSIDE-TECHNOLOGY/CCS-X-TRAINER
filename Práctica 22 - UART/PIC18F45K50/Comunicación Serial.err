@@ -1,0 +1,5 @@
+Compiling C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 22 - UART\Proyecto\PIC18F45K50\Comunicación Serial on 15-oct.-21 at 17:30
+>>> Warning 203 "C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 22 - UART\Proyecto\PIC18F45K50\Comunicación Serial.c" Line 31(1,1): Condition always TRUE
+      Memory usage:   ROM=0%      RAM=0% - 0%
+      0 Errors,  1 Warnings.
+Build Successful.

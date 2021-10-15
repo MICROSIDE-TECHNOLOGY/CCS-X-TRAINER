@@ -1,0 +1,48 @@
+[PROJECT]
+Target=HC05.hex
+Processor_Text=PIC18F45K50
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=HC05.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\devices\;C:\Program Files (x86)\PICC\drivers\
+[HC05.c]
+Type=4
+[mru-list]
+1=HC05.c
+[Opened Files]
+1=HC05.c
+2=
+t1=5
+Count=1
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=2
+D1=27-09-2021
+D1_L=4
+D1_L1=[50805]Project Opened.
+D1_L2=[50810]Started Editing.
+D1_L3=[50825]Stopped Editing.
+TotalEdit=2
+TotalDebug=0
+D1_E=1
+D1_D=0
+D1_L4=[50825]Project Closed.
+D2=15-10-2021
+D2_L=4
+D2_L1=[61499]Project Opened.
+D2_L2=[61507]Started Editing.
+D2_L3=[61553]Stopped Editing.
+D2_E=1
+D2_D=0
+D2_L4=[61553]Project Closed.
+
+[defines]
+buildcount=2
+[Units]
+Count=1
+1=HC05 (main)

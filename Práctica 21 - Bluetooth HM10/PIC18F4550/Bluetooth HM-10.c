@@ -1,0 +1,77 @@
+/************************************************************************************************
+Company:
+Microside Technology Inc.
+
+Product Revision  :  1
+Device            :  X-TRAINER
+Driver Version    :  1.0
+************************************************************************************************/
+/*
+---------------------------------------------------------------------------
+Esta práctica consiste en realizar el envio de datos por medio de un módulo
+Bluetooth, usando el protocolo de comunicación serial UART, para enviar un
+comando simple para prender y apagar un LED incluido en la tarjeta X-TRAINER,
+y un segundo comando para preguntar el estado de un botón.
+---------------------------------------------------------------------------
+*/
+
+#include <18F4550.h>                            //Incluye el microcontrolador con el que se va a trabajar 
+#use delay(clock=48Mhz, crystal)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+#build(reset=0x02000,interrupt=0x02008)         //Asignación de los vectores de reset e interrupción
+#org 0x0000,0x1FFF {}                           //Reserva espacio en la memoria para la versión con bootloader
+
+
+#USE RS232(stream=SERIE, BAUD=9600, PARITY=N, XMIT=PIN_C6, RCV=PIN_C7,BITS=8)
+
+#define LED pin_A4
+#define Boton pin_A2
+
+     void main(void)
+        {
+
+              while(!kbhit())                    //Pregunta si hay algun dato recibido
+               while (TRUE)
+                     {
+                       char Caracter = getc ();  //Guarda el caracter
+
+                       if (Caracter == '0')
+
+                            {
+
+                               output_low (LED); //Apaga el LED
+                               fprintf(SERIE,"LED APAGADO\\\\n");
+
+                            }
+
+                       else if (Caracter == '1')
+
+                         {
+                               output_HIGH (LED); //Enciende el LED
+                               fprintf(SERIE,"LED ENCENDIDO\\\\n");
+
+                         }
+
+                       else if (Caracter == '?')    //Pregunta el estado del botón
+
+                         {
+
+                        if (1 == input (Boton))
+
+                           {
+
+                          Printf ("0");             //Envía un 0 si el botón no está presionado
+
+                            }
+
+                 else
+
+                       {
+
+                           Printf ("1");            //Envía un 1 si el botón está presionado
+
+                       }
+
+                }
+
+        }
+}

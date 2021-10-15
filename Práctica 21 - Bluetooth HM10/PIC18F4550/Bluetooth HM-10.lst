@@ -1,0 +1,210 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               15-oct.-21 17:27
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 21 - Bluetooth HM10\Proyecto\PIC18F4550\Bluetooth HM-10.lst
+
+               ROM used:   202 bytes (1%)
+                           Largest free fragment is 24370
+               RAM used:   7 (0%) at main() level
+                           9 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   204C
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ---------------------------------------------------------------------------
+.................... Esta práctica consiste en realizar el envio de datos por medio de un módulo
+.................... Bluetooth, usando el protocolo de comunicación serial UART, para enviar un
+.................... comando simple para prender y apagar un LED incluido en la tarjeta X-TRAINER,
+.................... y un segundo comando para preguntar el estado de un botón.
+.................... ---------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F4550.h>                            //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F4550 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F4550
+*
+2008:  DATA 4C,45
+200A:  DATA 44,20
+200C:  DATA 41,50
+200E:  DATA 41,47
+2010:  DATA 41,44
+2012:  DATA 4F,5C
+2014:  DATA 5C,6E
+2016:  DATA 00,00
+2018:  DATA 4C,45
+201A:  DATA 44,20
+201C:  DATA 45,4E
+201E:  DATA 43,45
+2020:  DATA 4E,44
+2022:  DATA 49,44
+2024:  DATA 4F,5C
+2026:  DATA 5C,6E
+2028:  DATA 00,00
+202A:  TBLRD*+
+202C:  MOVF   FF5,F
+202E:  BZ    204A
+2030:  MOVFF  FF6,07
+2034:  MOVFF  FF7,08
+2038:  MOVF   FF5,W
+203A:  BTFSS  F9E.4
+203C:  BRA    203A
+203E:  MOVWF  FAD
+2040:  MOVFF  07,FF6
+2044:  MOVFF  08,FF7
+2048:  BRA    202A
+204A:  RETURN 0
+.................... 
+.................... #list
+.................... 
+.................... #use delay(clock=48Mhz, crystal)                //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #build(reset=0x02000,interrupt=0x02008)         //Asignación de los vectores de reset e interrupción
+.................... #org 0x0000,0x1FFF {}                           //Reserva espacio en la memoria para la versión con bootloader
+.................... 
+.................... 
+.................... #USE RS232(stream=SERIE, BAUD=9600, PARITY=N, XMIT=PIN_C6, RCV=PIN_C7,BITS=8)
+.................... 
+.................... #define LED pin_A4
+.................... #define Boton pin_A2
+.................... 
+....................      void main(void)
+204C:  CLRF   FF8
+204E:  BCF    FD0.7
+2050:  BSF    FB8.3
+2052:  MOVLW  E1
+2054:  MOVWF  FAF
+2056:  MOVLW  04
+2058:  MOVWF  FB0
+205A:  MOVLW  A6
+205C:  MOVWF  FAC
+205E:  MOVLW  90
+2060:  MOVWF  FAB
+2062:  CLRF   05
+2064:  CLRF   04
+2066:  MOVF   FC1,W
+2068:  ANDLW  C0
+206A:  IORLW  0F
+206C:  MOVWF  FC1
+206E:  MOVLW  07
+2070:  MOVWF  FB4
+....................         {
+.................... 
+....................               while(!kbhit())                    //Pregunta si hay algun dato recibido
+2072:  BTFSC  F9E.5
+2074:  BRA    20CC
+....................                while (TRUE)
+....................                      {
+....................                        char Caracter = getc ();  //Guarda el caracter
+2076:  BTFSS  F9E.5
+2078:  BRA    2076
+207A:  MOVFF  FAE,06
+.................... 
+....................                        if (Caracter == '0')
+207E:  MOVF   06,W
+2080:  SUBLW  30
+2082:  BNZ   2094
+.................... 
+....................                             {
+.................... 
+....................                                output_low (LED); //Apaga el LED
+2084:  BCF    F92.4
+2086:  BCF    F89.4
+....................                                fprintf(SERIE,"LED APAGADO\\\\n");
+2088:  MOVLW  08
+208A:  MOVWF  FF6
+208C:  MOVLW  20
+208E:  MOVWF  FF7
+2090:  RCALL  202A
+.................... 
+....................                             }
+2092:  BRA    20C8
+.................... 
+....................                        else if (Caracter == '1')
+2094:  MOVF   06,W
+2096:  SUBLW  31
+2098:  BNZ   20AA
+.................... 
+....................                          {
+....................                                output_HIGH (LED); //Enciende el LED
+209A:  BCF    F92.4
+209C:  BSF    F89.4
+....................                                fprintf(SERIE,"LED ENCENDIDO\\\\n");
+209E:  MOVLW  18
+20A0:  MOVWF  FF6
+20A2:  MOVLW  20
+20A4:  MOVWF  FF7
+20A6:  RCALL  202A
+.................... 
+....................                          }
+20A8:  BRA    20C8
+.................... 
+....................                        else if (Caracter == '?')    //Pregunta el estado del botón
+20AA:  MOVF   06,W
+20AC:  SUBLW  3F
+20AE:  BNZ   20C8
+.................... 
+....................                          {
+.................... 
+....................                         if (1 == input (Boton))
+20B0:  BSF    F92.2
+20B2:  BTFSS  F80.2
+20B4:  BRA    20C0
+.................... 
+....................                            {
+.................... 
+....................                           Printf ("0");             //Envía un 0 si el botón no está presionado
+20B6:  MOVLW  30
+20B8:  BTFSS  F9E.4
+20BA:  BRA    20B8
+20BC:  MOVWF  FAD
+.................... 
+....................                             }
+20BE:  BRA    20C8
+.................... 
+....................                  else
+.................... 
+....................                        {
+.................... 
+....................                            Printf ("1");            //Envía un 1 si el botón está presionado
+20C0:  MOVLW  31
+20C2:  BTFSS  F9E.4
+20C4:  BRA    20C2
+20C6:  MOVWF  FAD
+.................... 
+....................                        }
+.................... 
+....................                 }
+20C8:  BRA    2076
+20CA:  BRA    2072
+.................... 
+....................         }
+.................... }
+20CC:  SLEEP 
+
+Configuration Fuses:
+   Word  1: CC07   PLL12 CPUDIV1 NOUSBDIV HS FCMEN IESO
+   Word  2: 1E3E   PUT BROWNOUT BORV21 VREGEN NOWDT WDT32768
+   Word  3: 8700   CCP2C1 PBADEN LPT1OSC MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

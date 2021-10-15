@@ -1,0 +1,50 @@
+
+ROM used:   734/32768 (2%)
+            738/32768 (2%) including unused fragments
+
+            0.7 Average locations per line
+            61.2 Average locations per statement
+
+RAM used:   38/2048 (2%) at main() level
+            45/2048 (2%) worst case
+
+Stack used: 0 worst case (0 in main + 0 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   58    12 100  CTMU.c
+  988     0   0  ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F45K50.h
+----- -----
+ 1046    12 Total
+
+Page ROM  %  RAM    Vol Diff  Functions:
+---- --- --- ---    --- ----  ----------
+0     42   3    1             @delay_ms1
+0     20   1    0             @const741
+0     50   3    0             @SINGLE_CTMU_CONV
+0    302  21    5             @CTMUISR
+0    150  10    1    226  3.6  main
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               1
+    Statements              12
+    Comments                217
+    Volume (V)              237
+    Difficulty (D)          2.9
+    Effort to implement (E) 683
+    Time to implement (T)   1 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   2
+    Maintainability (MI)    65
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-01FFE     0  8192  
+02000-02006     4  4  
+02008-020AC   166  0  
+020AE-07FFE   564  23838  
+
+
+

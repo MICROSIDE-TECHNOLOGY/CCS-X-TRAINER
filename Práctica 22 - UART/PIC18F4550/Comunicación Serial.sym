@@ -1,0 +1,66 @@
+000     @SCRATCH
+001     @SCRATCH
+001     _RETURN_
+002     @SCRATCH
+003     @SCRATCH
+005     main.Caracter
+F83     PSP_DATA
+FB4.6   C1OUT
+FB4.7   C2OUT
+FBB     CCP_2_LOW
+FBB     CCP_2
+FBC     CCP_2_HIGH
+FBE     CCP_1_LOW
+FBE     CCP_1
+FBF     CCP_1_HIGH
+FE1-FE2 @READ_PACKED_MEMORY.P1
+FE1-FE2 @WRITE_PACKED_MEMORY.P2
+FE9-FEA @READ_PACKED_MEMORY.P1
+FE9-FEA @READ_PROGRAM_MEMORY.P2
+FE9-FEA @WRITE_PROGRAM_MEMORY.P3
+FE9-FEA @WRITE_PACKED_MEMORY.P4
+FF6-FF8 @READ_PROGRAM_MEMORY.P1
+FF6-FF8 @WRITE_PROGRAM_MEMORY.P2
+
+ROM Allocation:
+002008  main
+002008  @cinit1
+00202A  @cinit2
+
+Project Directory:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 22 - UART\Proyecto\PIC18F4550\
+
+Project Files:
+    Comunicación Serial.c                                   [15-oct.-21 17:31  CRC=9EA29C04]
+    ..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F4550.h [12-jul.-21 11:39  CRC=BFBE72F1]
+
+Source signature=1E1F81E6
+Program memory checksum=0000
+Hex file CRC=B2A2
+
+Units:
+    C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 22 - UART\Proyecto\PIC18F4550\Comunicación Serial (main)
+
+Compiler Settings:
+    Processor:      PIC18F4550
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:   CCS5
+
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+Output Files:
+    XREF file:   Comunicación Serial.xsym
+    Errors:      Comunicación Serial.err
+    Ext Symbols: Comunicación Serial.esym
+    INHX32:      Comunicación Serial.hex
+    Symbols:     Comunicación Serial.sym
+    List:        Comunicación Serial.lst
+    Debug/COFF:  Comunicación Serial.cof
+    Project:     Comunicación Serial.ccspjt
+    Call Tree:   Comunicación Serial.tre
+    Statistics:  Comunicación Serial.STA

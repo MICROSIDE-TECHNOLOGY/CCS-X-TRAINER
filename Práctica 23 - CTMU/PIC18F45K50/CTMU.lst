@@ -1,0 +1,422 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               15-oct.-21 17:32
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 23 - CTMU\Proyecto\PIC18F45K50\CTMU.lst
+
+               ROM used:   734 bytes (2%)
+                           Largest free fragment is 23838
+               RAM used:   38 (2%) at main() level
+                           45 (2%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   224C
+*
+2008:  MOVWF  04
+200A:  MOVFF  FD8,05
+200E:  MOVFF  FE0,06
+2012:  MOVLB  0
+2014:  MOVFF  FE9,0C
+2018:  MOVFF  FEA,07
+201C:  MOVFF  FE1,08
+2020:  MOVFF  FE2,09
+2024:  MOVFF  FD9,0A
+2028:  MOVFF  FDA,0B
+202C:  MOVFF  FF3,12
+2030:  MOVFF  FF4,13
+2034:  MOVFF  FFA,14
+2038:  MOVFF  FF5,15
+203C:  MOVFF  FF6,16
+2040:  MOVFF  FF7,17
+2044:  MOVFF  00,0E
+2048:  MOVFF  01,0F
+204C:  MOVFF  02,10
+2050:  MOVFF  03,11
+2054:  BTFSS  FF2.5
+2056:  GOTO   2060
+205A:  BTFSC  FF2.2
+205C:  GOTO   20F4
+2060:  MOVFF  0E,00
+2064:  MOVFF  0F,01
+2068:  MOVFF  10,02
+206C:  MOVFF  11,03
+2070:  MOVFF  0C,FE9
+2074:  MOVFF  07,FEA
+2078:  BSF    07.7
+207A:  MOVFF  08,FE1
+207E:  MOVFF  09,FE2
+2082:  MOVFF  0A,FD9
+2086:  MOVFF  0B,FDA
+208A:  MOVFF  12,FF3
+208E:  MOVFF  13,FF4
+2092:  MOVFF  14,FFA
+2096:  MOVFF  15,FF5
+209A:  MOVFF  16,FF6
+209E:  MOVFF  17,FF7
+20A2:  MOVF   04,W
+20A4:  MOVFF  06,FE0
+20A8:  MOVFF  05,FD8
+20AC:  RETFIE 0
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ------------------------------------------------------------------------------
+.................... Se configura el módulo CTMU para detectar cuando se toca el pad conectado
+.................... al pin A3 de X-TRAINERp8 y envia el caracter 'C' relacionado a ese pin con el sensor touch,
+.................... al mismo tiempo enciende el LED integrado, conectado en el pin A1 para mostrar cuando es tocado
+.................... el sensor.
+.................... ------------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                  //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+*
+221C:  BCF    FF2.2
+221E:  GOTO   2060
+.................... #device PIC18F45K50
+*
+20AE:  CLRF   FF7
+20B0:  ADDLW  BE
+20B2:  MOVWF  FF6
+20B4:  MOVLW  20
+20B6:  ADDWFC FF7,F
+20B8:  TBLRD*+
+20BA:  MOVF   FF5,W
+20BC:  RETURN 0
+20BE:  DATA 00,00
+20C0:  DATA 00,43
+20C2:  MOVLW  83
+20C4:  ANDWF  FC2,F
+20C6:  MOVLW  1F
+20C8:  ANDWF  1A,W
+20CA:  RLNCF  FE8,W
+20CC:  RLNCF  FE8,W
+20CE:  IORWF  FC2,F
+20D0:  MOVLB  F
+20D2:  BSF    x57.1
+20D4:  MOVLW  18
+20D6:  DECFSZ FE8,W
+20D8:  BRA    20D6
+20DA:  BCF    x57.1
+20DC:  BSF    x56.0
+20DE:  MOVLW  28
+20E0:  DECFSZ FE8,W
+20E2:  BRA    20E0
+20E4:  BCF    x56.0
+20E6:  BSF    FC2.1
+20E8:  BTFSC  FC2.1
+20EA:  BRA    20E8
+20EC:  MOVF   FC4,W
+20EE:  MOVLB  0
+20F0:  RETURN 0
+20F2:  RETURN 0
+20F4:  MOVLW  FD
+20F6:  MOVWF  FD7
+20F8:  MOVLW  CE
+20FA:  MOVWF  FD6
+20FC:  NOP   
+20FE:  BTFSC  1A.7
+2100:  BRA    2144
+2102:  BTFSS  1A.6
+2104:  BRA    2144
+2106:  CLRF   FEA
+2108:  MOVLW  1B
+210A:  MOVWF  FE9
+210C:  MOVF   1A,W
+210E:  ANDLW  1F
+2110:  BCF    FD8.0
+2112:  RLCF   FE8,W
+2114:  ADDWF  FE9,F
+2116:  MOVLW  00
+2118:  ADDWFC FEA,F
+211A:  MOVFF  FEF,00
+211E:  MOVF   00,W
+2120:  BCF    FD8.0
+2122:  RRCF   FE8,F
+2124:  BCF    FD8.0
+2126:  RRCF   FE8,F
+2128:  ADDWF  00,F
+212A:  MOVLW  10
+212C:  MOVWF  26
+212E:  RCALL  20C2
+2130:  CPFSGT 00
+2132:  BRA    213A
+2134:  BSF    1A.6
+2136:  BCF    1A.7
+2138:  BRA    2216
+213A:  BCF    1A.6
+213C:  BCF    1A.7
+213E:  DECFSZ 26,F
+2140:  BRA    212E
+2142:  BRA    2216
+2144:  MOVLW  01
+2146:  MOVWF  27
+2148:  MOVLW  00
+214A:  MOVWF  28
+214C:  MOVWF  29
+214E:  MOVWF  2A
+2150:  MOVLW  E0
+2152:  ANDWF  1A,F
+2154:  MOVLW  1F
+2156:  ANDWF  1A,W
+2158:  MOVWF  01
+215A:  MOVLW  04
+215C:  CPFSLT 01
+215E:  BRA    2216
+2160:  MOVLW  08
+2162:  ANDWF  27,W
+2164:  BNZ   2178
+2166:  MOVLW  00
+2168:  ANDWF  28,W
+216A:  BNZ   2178
+216C:  MOVLW  00
+216E:  ANDWF  29,W
+2170:  BNZ   2178
+2172:  MOVLW  00
+2174:  ANDWF  2A,W
+2176:  BZ    21F4
+2178:  RCALL  20C2
+217A:  MOVWF  03
+217C:  BTFSS  1A.7
+217E:  BRA    21BA
+2180:  BTFSC  1A.6
+2182:  BRA    21A2
+2184:  CLRF   FEA
+2186:  MOVLW  1B
+2188:  MOVWF  FE9
+218A:  MOVF   01,W
+218C:  BCF    FD8.0
+218E:  RLCF   FE8,W
+2190:  ADDWF  FE9,F
+2192:  MOVLW  00
+2194:  ADDWFC FEA,F
+2196:  MOVF   03,W
+2198:  BCF    FD8.0
+219A:  RRCF   FE8,F
+219C:  SUBWF  03,W
+219E:  MOVWF  FEF
+21A0:  BRA    2208
+21A2:  CLRF   FEA
+21A4:  MOVLW  1B
+21A6:  MOVWF  FE9
+21A8:  MOVF   01,W
+21AA:  BCF    FD8.0
+21AC:  RLCF   FE8,W
+21AE:  ADDWF  FE9,F
+21B0:  MOVLW  00
+21B2:  ADDWFC FEA,F
+21B4:  MOVFF  03,FEF
+21B8:  BRA    2208
+21BA:  MOVF   19,W
+21BC:  BNZ   2216
+21BE:  CLRF   FEA
+21C0:  MOVLW  1B
+21C2:  MOVWF  FE9
+21C4:  MOVF   01,W
+21C6:  BCF    FD8.0
+21C8:  RLCF   FE8,W
+21CA:  ADDWF  FE9,F
+21CC:  MOVLW  00
+21CE:  ADDWFC FEA,F
+21D0:  MOVF   FEF,W
+21D2:  CPFSLT 03
+21D4:  BRA    2208
+21D6:  MOVLW  0A
+21D8:  MOVWF  02
+21DA:  MOVF   FEF,W
+21DC:  CPFSLT 03
+21DE:  BRA    2208
+21E0:  DCFSNZ 02,F
+21E2:  BRA    21EA
+21E4:  RCALL  20C2
+21E6:  MOVWF  03
+21E8:  BRA    21DA
+21EA:  MOVF   01,W
+21EC:  RCALL  20AE
+21EE:  MOVWF  19
+21F0:  BSF    1A.6
+21F2:  BRA    2216
+21F4:  CLRF   FEA
+21F6:  MOVLW  1B
+21F8:  MOVWF  FE9
+21FA:  MOVF   01,W
+21FC:  BCF    FD8.0
+21FE:  RLCF   FE8,W
+2200:  ADDWF  FE9,F
+2202:  MOVLW  00
+2204:  ADDWFC FEA,F
+2206:  MOVWF  FEF
+2208:  INCF   1A,F
+220A:  BCF    FD8.0
+220C:  RLCF   27,F
+220E:  RLCF   28,F
+2210:  RLCF   29,F
+2212:  RLCF   2A,F
+2214:  BRA    2154
+2216:  BTFSC  1A.7
+2218:  BCF    1A.6
+221A:  BCF    1A.7
+.................... 
+.................... #list
+.................... 
+.................... #device adc=10                         //ADC a 10 bits
+.................... #use delay(internal=48MHz)             //Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+*
+2222:  CLRF   FEA
+2224:  MOVLW  25
+2226:  MOVWF  FE9
+2228:  MOVF   FEF,W
+222A:  BZ    2248
+222C:  MOVLW  0F
+222E:  MOVWF  01
+2230:  CLRF   00
+2232:  DECFSZ 00,F
+2234:  BRA    2232
+2236:  DECFSZ 01,F
+2238:  BRA    2230
+223A:  MOVLW  8F
+223C:  MOVWF  00
+223E:  DECFSZ 00,F
+2240:  BRA    223E
+2242:  NOP   
+2244:  DECFSZ FEF,F
+2246:  BRA    222C
+2248:  GOTO   22D6 (RETURN)
+.................... #build(reset=0x02000,interrupt=0x02008)//Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                  //Reserva espacio en memoria para el bootloader
+.................... 
+.................... #define LED pin_A4
+.................... 
+.................... /*
+.................... ------------------------------------------------------------------------------
+.................... Configuración del módulo CTMU para que funcione como sensor de toque
+.................... -El Threshold controla la sensibilidad (0-100)
+.................... -Scantime tiempo en milisegundo para escanear el pin.
+.................... -El Pin para conectar el sensor, debe ser una entrada análogica, se asocia con un caracter,
+....................   si hubiera más sensores a cada uno se le asigna un caracter diferente para identificarlo.
+.................... ------------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #USE TOUCHPAD(RANGE=L, THRESHOLD=50, SCANTIME=12, PIN_A3='C')
+.................... 
+.................... void main()
+224C:  CLRF   FF8
+224E:  BCF    FD0.7
+2250:  BSF    07.7
+2252:  MOVLW  70
+2254:  MOVWF  FD3
+2256:  CLRF   FD2
+2258:  CLRF   F9B
+225A:  CLRF   1A
+225C:  CLRF   19
+225E:  MOVLB  F
+2260:  CLRF   x57
+2262:  CLRF   x56
+2264:  MOVLW  14
+2266:  IORWF  x56,F
+2268:  MOVLW  01
+226A:  IORWF  x55,F
+226C:  CLRF   FC1
+226E:  MOVLW  0E
+2270:  MOVWF  FC0
+2272:  BSF    FC2.0
+2274:  BSF    x57.7
+2276:  MOVLB  2
+2278:  CLRF   xE2
+227A:  CLRF   xE3
+227C:  BCF    1A.6
+227E:  BSF    1A.7
+2280:  MOVLW  87
+2282:  MOVWF  FD5
+2284:  MOVLW  FD
+2286:  MOVWF  FD7
+2288:  MOVLW  CE
+228A:  MOVWF  FD6
+228C:  NOP   
+228E:  BSF    FF2.5
+2290:  MOVLW  C0
+2292:  IORWF  FF2,F
+2294:  MOVF   FC1,W
+2296:  ANDLW  F0
+2298:  MOVWF  FC1
+229A:  MOVLW  08
+229C:  MOVLB  F
+229E:  MOVWF  x5B
+22A0:  MOVLW  00
+22A2:  MOVWF  x5F
+22A4:  MOVWF  x5C
+22A6:  MOVWF  x5D
+22A8:  MOVWF  x5E
+22AA:  CLRF   F9A
+22AC:  CLRF   F99
+22AE:  CLRF   F98
+.................... {
+....................    TOUCHPAD_STATE (1);               //calibra
+22B0:  CLRF   1A
+22B2:  CLRF   19
+22B4:  BSF    1A.7
+....................    TOUCHPAD_STATE (0);               //regresa a estado normal
+22B6:  CLRF   1A
+....................    enable_interrupts (GLOBAL);       //Habilita interrupciones
+22B8:  MOVLW  C0
+22BA:  IORWF  FF2,F
+....................    while(TRUE)
+....................    {
+....................       if(TOUCHPAD_HIT() )            //Verifica si se ha tocado el sensor
+22BC:  MOVF   19,W
+22BE:  BZ    22DA
+....................       {
+....................         
+....................          if (TOUCHPAD_GETC()=='C')   //Verifica cúal sensor fue tocado (se identifica con un carácter)
+22C0:  MOVF   19,W
+22C2:  BZ    22C0
+22C4:  CLRF   19
+22C6:  SUBLW  43
+22C8:  BNZ   22D8
+....................          {
+....................            output_bit (LED, 1);      //enciende LED
+22CA:  BSF    F89.4
+22CC:  BCF    F92.4
+....................            delay_ms (80);            //espera
+22CE:  MOVLW  50
+22D0:  MOVWF  25
+22D2:  MOVLB  0
+22D4:  BRA    2222
+22D6:  MOVLB  F
+....................          }
+....................       }
+22D8:  BRA    22DE
+.................... 
+....................       else output_bit (LED, 0);     //apaga LED si no ha sido tocado el sensor
+22DA:  BCF    F89.4
+22DC:  BCF    F92.4
+22DE:  BRA    22BC
+....................     }
+.................... }
+22E0:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

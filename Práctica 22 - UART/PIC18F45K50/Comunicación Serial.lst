@@ -1,0 +1,163 @@
+CCS PCH C Compiler, Version 5.105Pd, 1               15-oct.-21 17:30
+Compiler operating in Evaluation Mode
+To obtain a fully enabled compiler visit www.ccsinfo.com/products
+
+               Filename:   C:\Users\grego\OneDrive\Desktop\CSS_Practicas_OK\Práctica 22 - UART\Proyecto\PIC18F45K50\Comunicación Serial.lst
+
+               ROM used:   118 bytes (0%)
+                           Largest free fragment is 24454
+               RAM used:   5 (0%) at main() level
+                           5 (0%) worst case
+               Stack used: 0 locations
+               Stack size: 31
+
+*
+2000:  GOTO   2008
+.................... /************************************************************************************************
+.................... Company:
+.................... Microside Technology Inc.
+.................... 
+.................... Product Revision  :  1
+.................... Device            :  X-TRAINER
+.................... Driver Version    :  1.0
+.................... ************************************************************************************************/
+.................... /*
+.................... ------------------------------------------------------------------------------
+....................  Implementar comunicación serial para enviar un comando simple para prender y
+....................  apagar un LED incluido en la tarjeta X-TRAINER, y un segundo comando para
+....................  preguntar el estado de un botón.
+.................... ------------------------------------------------------------------------------
+.................... */
+.................... 
+.................... #include <18F45K50.h>                                 //Incluye el microcontrolador con el que se va a trabajar 
+.................... //////////// Standard Header file for the PIC18F45K50 device ////////////////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... ////        (C) Copyright 1996, 2020 Custom Computer Services          ////
+.................... //// This source code may only be used by licensed users of the CCS C  ////
+.................... //// compiler.  This source code may only be distributed to other      ////
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction ////
+.................... //// or distribution is permitted without written permission.          ////
+.................... //// Derivative programs created using this software in object code    ////
+.................... //// form are not restricted in any way.                               ////
+.................... ///////////////////////////////////////////////////////////////////////////
+.................... #device PIC18F45K50
+.................... 
+.................... #list
+.................... 
+.................... #use delay(internal=48MHz)                            // Tipo de oscilador y frecuencia dependiendo del microcontrolador 
+.................... #build(reset=0x02000,interrupt=0x02008)               // Asigna los vectores de reset e interrupción para la versión con bootloader
+.................... #org 0x0000,0x1FFF {}                                 // Reserva espacio en memoria para el bootloader
+.................... 
+.................... #use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7,STREAM=UART ) //Configuración del puerto UART
+.................... 
+.................... #define LED PIN_A4                                         //Pin donde está conectado el LED del X-TRAINER
+.................... #define Boton PIN_A2                                        //Pin donde está conectado el BOTON del X-TRAINER
+.................... 
+.................... void main ()
+*
+2008:  CLRF   FF8
+200A:  BCF    FD0.7
+200C:  MOVLW  70
+200E:  MOVWF  FD3
+2010:  CLRF   FD2
+2012:  CLRF   F9B
+2014:  BSF    FB8.3
+2016:  MOVLW  E1
+2018:  MOVWF  FAF
+201A:  MOVLW  04
+201C:  MOVWF  FB0
+201E:  MOVLW  A6
+2020:  MOVWF  FAC
+2022:  MOVLW  90
+2024:  MOVWF  FAB
+2026:  MOVLB  F
+2028:  CLRF   x5B
+202A:  CLRF   x5C
+202C:  CLRF   x5D
+202E:  CLRF   x5E
+2030:  CLRF   x5F
+2032:  CLRF   F9A
+2034:  CLRF   F99
+2036:  CLRF   F98
+.................... 
+....................   {
+.................... 
+....................    while (1)
+.................... 
+....................   {
+....................    char Caracter = getc ();                                 //Guarda el caracter
+2038:  BTFSS  F9E.5
+203A:  BRA    2038
+203C:  MOVFF  FAE,05
+....................    
+....................    if (Caracter == '0')
+2040:  MOVF   05,W
+2042:  SUBLW  30
+2044:  BNZ   204C
+.................... 
+....................     {
+....................       output_low (LED);                                     //Apaga el LED
+2046:  BCF    F92.4
+2048:  BCF    F89.4
+....................     }
+204A:  BRA    2076
+.................... 
+....................      else if (Caracter == '1')
+204C:  MOVF   05,W
+204E:  SUBLW  31
+2050:  BNZ   2058
+.................... 
+....................     {
+....................      output_HIGH (LED);                                     //Enciende el LED
+2052:  BCF    F92.4
+2054:  BSF    F89.4
+....................     }
+2056:  BRA    2076
+.................... 
+....................      else if (Caracter == '?')
+2058:  MOVF   05,W
+205A:  SUBLW  3F
+205C:  BNZ   2076
+.................... 
+....................     {
+.................... 
+....................         if (1 == input (Boton))                             //Pregunta el estado del botón
+205E:  BSF    F92.2
+2060:  BTFSS  F80.2
+2062:  BRA    206E
+.................... 
+....................           {                                                                   
+....................             Printf ("0");                                   //Envía un 0 si el botón no está presionado
+2064:  MOVLW  30
+2066:  BTFSS  F9E.4
+2068:  BRA    2066
+206A:  MOVWF  FAD
+....................           }
+206C:  BRA    2076
+.................... 
+....................           else
+.................... 
+....................          {
+....................            Printf ("1");                                     //Envía un 1 si el botón está presionado
+206E:  MOVLW  31
+2070:  BTFSS  F9E.4
+2072:  BRA    2070
+2074:  MOVWF  FAD
+....................          }
+.................... 
+....................       }
+2076:  BRA    2038
+.................... 
+....................    }
+.................... 
+.................... }
+2078:  SLEEP 
+
+Configuration Fuses:
+   Word  1: C823   PLL3X PLLEN NOCPUDIV LS48MHZ INTRC_IO PRIMARY_SW FCMEN IESO
+   Word  2: 3C5E   PUT BROWNOUT BORV19 NOLPBOR NOWDT WDT32768
+   Word  3: D300   CCP2C1 PBADEN T3CKC0 SDOB3 MCLR
+   Word  4: 00A1   STVREN NOLVP ICSP2 NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB

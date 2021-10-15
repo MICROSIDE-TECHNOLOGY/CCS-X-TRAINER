@@ -1,0 +1,49 @@
+[PROJECT]
+Target=Bluetooth HM-10.hex
+Processor_Text=PIC18F4550
+CCSVersion=5.105Pd
+Compiler=PCH
+[Target Data]
+FileList=Bluetooth HM-10.c
+[Bluetooth HM-10.c]
+Type=4
+[mru-list]
+1=Bluetooth HM-10.c
+
+[defines]
+buildcount=4
+
+[ProjectLog]
+Days=3
+D1=02-12-2020
+D1_L=1
+D1_L1=[37125]Project Closed.
+D2=27-09-2021
+D2_L=4
+D2_L1=[50940]Project Opened.
+D2_L2=[50947]Started Editing.
+D2_L3=[50982]Stopped Editing.
+TotalEdit=2
+TotalDebug=0
+D2_E=1
+D2_D=0
+D2_L4=[50982]Project Closed.
+D3=15-10-2021
+D3_L=4
+D3_L1=[62816]Project Opened.
+D3_L2=[62866]Started Editing.
+D3_L3=[62889]Stopped Editing.
+D3_E=1
+D3_D=0
+D3_L4=[62889]Project Closed.
+
+[fileformats]
+forcecoff=0
+
+[Opened Files]
+1=Bluetooth HM-10.c
+t1=5
+Count=1
+[Units]
+Count=1
+1=Bluetooth HM-10 (main)

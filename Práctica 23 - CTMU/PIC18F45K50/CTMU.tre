@@ -1,0 +1,10 @@
+ÀÄCTMU
+   ÃÄmain  0/150  Ram=1
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄ@cinit2  (Inline)  Ram=0
+   ³  ÀÄ@delay_ms1  0/42  Ram=1
+   ÀÄ@CTMUISR  0/302  Ram=5
+      ÃÄ@SINGLE_CTMU_CONV  0/50  Ram=0
+      ÃÄ@SINGLE_CTMU_CONV  0/50  Ram=0
+      ÃÄ@SINGLE_CTMU_CONV  0/50  Ram=0
+      ÀÄ@const741  0/20  Ram=0
